@@ -12,9 +12,9 @@ int disp_set_orientation(void)
 	}
 
 #ifdef CONFIG_PROSPECTOR_ROTATE_DISPLAY_180
-	int ret = display_set_orientation(display, DISPLAY_ORIENTATION_ROTATED_90);
+	int ret = display_set_orientation(display, DISPLAY_ORIENTATION_NORMAL);
 #else
-	int ret = display_set_orientation(display, DISPLAY_ORIENTATION_ROTATED_270);
+	int ret = display_set_orientation(display, DISPLAY_ORIENTATION_ROTATED_180);
 #endif
 	if (ret < 0)
 	{
