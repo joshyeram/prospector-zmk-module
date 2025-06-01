@@ -59,7 +59,7 @@ int zmk_widget_layer_status_init(struct zmk_widget_layer_status *widget, lv_obj_
     lv_buttonmatrix_set_one_checked(widget->obj, true);
     lv_buttonmatrix_set_button_ctrl(widget->obj, 0, LV_BUTTONMATRIX_CTRL_CHECKED);
 
-    lv_obj_set_style_text_font(widget->obj, &lv_font_unscii_8, LV_PART_MAIN);
+    lv_obj_set_style_text_font(widget->obj, &LV_FONT_UNSCII_8, LV_PART_MAIN);
 
     lv_obj_align(widget->obj, LV_ALIGN_CENTER, 0, 0);
 
