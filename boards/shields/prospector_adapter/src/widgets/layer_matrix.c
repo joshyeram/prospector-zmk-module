@@ -65,6 +65,8 @@ int zmk_widget_layer_matrix_init(struct zmk_widget_layer_matrix *widget, lv_obj_
 
     //lv_obj_add_event_cb(widget->obj, mask_event_cb, LV_EVENT_ALL, NULL);
     sys_slist_append(&widgets, &widget->node);
+
+    widget_layer_matrix_init();
     return 0;
 }
 
