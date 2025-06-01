@@ -1,4 +1,4 @@
-#include "layer_status.h"
+#include "layer_matrix.h"
 
 #include <ctype.h>
 #include <zmk/display.h>
@@ -13,39 +13,39 @@ LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 const char * layer_map[] = {"base", "num", "sym",  "arr", "\n", "media", "mouse", "funct", NULL};
 static sys_slist_t widgets = SYS_SLIST_STATIC_INIT(&widgets);
 
-struct layer_status_state 
+struct layer_matrix_state 
 {
     uint8_t index;
 };
 
-static void layer_status_set_sel(lv_obj_t *buttonMatrix, struct layer_status_state state) 
+static void layer_matrix_set_sel(lv_obj_t *buttonMatrix, struct layer_matrix_state state) 
 {
     lv_buttonmatrix_clear_button_ctrl_all(buttonMatrix, LV_BUTTONMATRIX_CTRL_CHECKED);
     lv_buttonmatrix_set_button_ctrl(buttonMatrix, state.index, LV_BUTTONMATRIX_CTRL_CHECKED);
 }
 
 
-static void layer_status_update_cb(struct layer_status_state state) 
+static void layer_matrix_update_cb(struct layer_matrix_state state) 
 { 
-    struct zmk_widget_layer_status *widget;
+    struct zmk_widget_layer_matrix *widget;
     SYS_SLIST_FOR_EACH_CONTAINER(&widgets, widget, node) 
     {
-        layer_status_set_sel(widget->obj, state);
+        layer_matrix_set_sel(widget->obj, state);
     }
 }
 
-static struct layer_status_state layer_status_get_state(const zmk_event_t *eh) {
+static struct layer_matrix_state layer_matrix_get_state(const zmk_event_t *eh) {
     uint8_t index = zmk_keymap_highest_layer_active();
-    LOG_INF("Status set to: %d", index);
-    return (struct layer_status_state){
+    LOG_INF("matrix set to: %d", index);
+    return (struct layer_matrix_state){
         .index = index,
     };
 }
 
-ZMK_DISPLAY_WIDGET_LISTENER(widget_layer_status, struct layer_status_state, layer_status_update_cb, layer_status_get_state)
-ZMK_SUBSCRIPTION(widget_layer_status, zmk_layer_state_changed);
+ZMK_DISPLAY_WIDGET_LISTENER(widget_layer_matrix, struct layer_matrix_state, layer_matrix_update_cb, layer_matrix_get_state)
+ZMK_SUBSCRIPTION(widget_layer_matrix, zmk_layer_state_changed);
 
-int zmk_widget_layer_status_init(struct zmk_widget_layer_status *widget, lv_obj_t *parent) 
+int zmk_widget_layer_matrix_init(struct zmk_widget_layer_matrix *widget, lv_obj_t *parent) 
 {
     widget->obj = lv_buttonmatrix_create(parent);
     lv_buttonmatrix_set_map(widget->obj, layer_map);
@@ -68,4 +68,4 @@ int zmk_widget_layer_status_init(struct zmk_widget_layer_status *widget, lv_obj_
     return 0;
 }
 
-lv_obj_t *zmk_widget_layer_status_obj(struct zmk_widget_layer_status *widget) {return widget->obj;}
+lv_obj_t *zmk_widget_layer_matrix_obj(struct zmk_widget_layer_matrix *widget) {return widget->obj;}
