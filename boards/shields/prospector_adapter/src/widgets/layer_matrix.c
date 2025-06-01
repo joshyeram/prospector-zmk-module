@@ -1,6 +1,5 @@
 #include "layer_matrix.h"
 
-#include <lv_buttonmatrix.h>
 #include <ctype.h>
 #include <zmk/display.h>
 #include <zmk/events/layer_state_changed.h>
