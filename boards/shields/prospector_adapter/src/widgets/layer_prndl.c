@@ -47,7 +47,6 @@ ZMK_SUBSCRIPTION(widget_layer_prndl, zmk_layer_state_changed);
 int zmk_widget_layer_prndl_init(struct zmk_widget_layer_prndl *widget, lv_obj_t *parent) 
 {
     widget->obj = lv_label_create(parent);
-    lv_buttonprndl_set_map(widget->obj, layer_map);
     lv_label_set_long_mode(widget->obj, LV_LABEL_LONG_MODE_WRAP);
     lv_obj_set_style_text_font(widget->obj, &LV_FONT_UNSCII_8, LV_PART_MAIN);
     lv_label_set_recolor(widget->obj, true);
