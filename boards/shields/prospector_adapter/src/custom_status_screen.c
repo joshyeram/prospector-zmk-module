@@ -3,7 +3,7 @@
 #include <zephyr/device.h>
 #include <zephyr/drivers/display.h>
 
-//#include "widgets/layer_matrix.h"
+#include "widgets/layer_matrix.h"
 #include "widgets/layer_roller.h"
 #include "widgets/battery_bar.h"
 #include "widgets/caps_word_indicator.h"
