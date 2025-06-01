@@ -5,32 +5,32 @@
 #include <zmk/events/layer_state_changed.h>
 #include <zmk/event_manager.h>
 #include <zmk/keymap.h>
-
 #include <fonts.h>
 
 #include <zephyr/logging/log.h>
 LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 
-static char layer_names_buffer[256] = {0}; // Buffer for concatenated layer names
+static char layer_roller_status[256] = {0}; // Buffer for concatenated layer names
 
 static sys_slist_t widgets = SYS_SLIST_STATIC_INIT(&widgets);
 
-struct layer_roller_state {
+struct layer_roller_state //
+{
     uint8_t index;
 };
 
-static void layer_roller_set_sel(lv_obj_t *roller, struct layer_roller_state state) {
+static void layer_roller_set_sel(lv_obj_t *roller, struct layer_roller_state state) { //
     lv_roller_set_selected(roller, state.index, LV_ANIM_ON);
 }
 
-static void layer_roller_update_cb(struct layer_roller_state state) {
+static void layer_roller_update_cb(struct layer_roller_state state) { //
     struct zmk_widget_layer_roller *widget;
     SYS_SLIST_FOR_EACH_CONTAINER(&widgets, widget, node) {
         layer_roller_set_sel(widget->obj, state);
     }
 }
 
-static struct layer_roller_state layer_roller_get_state(const zmk_event_t *eh) {
+static struct layer_roller_state layer_roller_get_state(const zmk_event_t *eh) { //
     uint8_t index = zmk_keymap_highest_layer_active();
     LOG_INF("Roller set to: %d", index);
     return (struct layer_roller_state){
@@ -38,9 +38,8 @@ static struct layer_roller_state layer_roller_get_state(const zmk_event_t *eh) {
     };
 }
 
-ZMK_DISPLAY_WIDGET_LISTENER(widget_layer_roller, struct layer_roller_state, layer_roller_update_cb,
-                            layer_roller_get_state)
-ZMK_SUBSCRIPTION(widget_layer_roller, zmk_layer_state_changed);
+ZMK_DISPLAY_WIDGET_LISTENER(widget_layer_roller, struct layer_roller_state, layer_roller_update_cb, layer_roller_get_state) //
+ZMK_SUBSCRIPTION(widget_layer_roller, zmk_layer_state_changed);// 
 
 static void mask_event_cb(lv_event_t * e)
 {
@@ -107,19 +106,13 @@ int zmk_widget_layer_roller_init(struct zmk_widget_layer_roller *widget, lv_obj_
                 ptr += strlen(ptr);
             }
 
-            if (layer_name && *layer_name) {
-#if IS_ENABLED(CONFIG_LAYER_ROLLER_ALL_CAPS)
-                while (*layer_name) {
-                    *ptr = toupper((unsigned char)*layer_name);
-                    ptr++;
-                    layer_name++;
-                }
-                *ptr = '\0';
-#else
+            if (layer_name && *layer_name) 
+            {
                 strcat(ptr, layer_name);
                 ptr += strlen(layer_name);
-#endif
-            } else {
+            } 
+            else 
+            {
                 // Just use the number for unnamed layers
                 char index_str[12];
                 snprintf(index_str, sizeof(index_str), "%d", i);
