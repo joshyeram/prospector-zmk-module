@@ -34,9 +34,9 @@ lv_obj_t *zmk_display_matrix_screen() {
     lv_obj_set_size(zmk_widget_battery_bar_obj(&battery_bar_widget), lv_pct(100), 48);
     lv_obj_align(zmk_widget_battery_bar_obj(&battery_bar_widget), LV_ALIGN_BOTTOM_MID, 0, 0);
 
-    // zmk_widget_layer_roller_init(&layer_roller_widget, screen);
-    // lv_obj_set_size(zmk_widget_layer_roller_obj(&layer_roller_widget), 224, 140);
-    // lv_obj_align(zmk_widget_layer_roller_obj(&layer_roller_widget), LV_ALIGN_LEFT_MID, 0, -20);
+    zmk_widget_layer_roller_init(&layer_roller_widget, screen);
+    lv_obj_set_size(zmk_widget_layer_roller_obj(&layer_roller_widget), 224, 140);
+    lv_obj_align(zmk_widget_layer_roller_obj(&layer_roller_widget), LV_ALIGN_LEFT_MID, 0, -20);
 
     //zmk_widget_layer_matrix_init(&layer_matrix_widget, screen);
     //lv_obj_set_size(zmk_widget_layer_matrix_obj(&layer_matrix_widget), 224, 140);
