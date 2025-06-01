@@ -1,4 +1,5 @@
 #include "layer_matrix.h"
+#include "layer_roller.h"
 
 #include <ctype.h>
 #include <zmk/display.h>
