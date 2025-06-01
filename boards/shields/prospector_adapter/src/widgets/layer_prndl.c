@@ -48,7 +48,7 @@ int zmk_widget_layer_prndl_init(struct zmk_widget_layer_prndl *widget, lv_obj_t 
 {
     widget->obj = lv_label_create(parent);
     lv_label_set_long_mode(widget->obj, LV_LABEL_LONG_WRAP);
-    lv_obj_set_style_text_font(widget->obj, &lv_font_unscii_8);
+    lv_obj_set_style_text_font(widget->obj, &lv_font_unscii_8, 0);
     lv_label_set_recolor(widget->obj, true);
     lv_obj_set_width(widget->obj, 200);
     lv_obj_set_style_text_align(widget->obj, LV_TEXT_ALIGN_CENTER, 0);
