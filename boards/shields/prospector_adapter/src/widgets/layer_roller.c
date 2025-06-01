@@ -32,7 +32,7 @@ static void layer_roller_update_cb(struct layer_roller_state state) { //
 
 static struct layer_roller_state layer_roller_get_state(const zmk_event_t *eh) { //
     uint8_t index = zmk_keymap_highest_layer_active();
-    LOG_INF("Roller set to: %d", index);
+    LOG_INF("How Roller set to: %d", index);
     return (struct layer_roller_state){
         .index = index,
     };
