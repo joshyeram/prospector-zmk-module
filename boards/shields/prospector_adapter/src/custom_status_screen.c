@@ -16,10 +16,10 @@
 #include <zephyr/logging/log.h>
 LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 
-static struct zmk_widget_layer_roller layer_roller_widget;
+//static struct zmk_widget_layer_roller layer_roller_widget;
 //static struct zmk_widget_layer_matrix layer_matrix_widget;
 static struct zmk_widget_battery_bar battery_bar_widget;
-static struct zmk_widget_caps_word_indicator caps_word_indicator_widget;
+//static struct zmk_widget_caps_word_indicator caps_word_indicator_widget;
 
 lv_obj_t *zmk_display_status_screen() {
     lv_obj_t *screen;
@@ -37,9 +37,9 @@ lv_obj_t *zmk_display_status_screen() {
     lv_obj_set_size(zmk_widget_battery_bar_obj(&battery_bar_widget), lv_pct(100), 48);
     lv_obj_align(zmk_widget_battery_bar_obj(&battery_bar_widget), LV_ALIGN_BOTTOM_MID, 0, 0);
 
-    zmk_widget_layer_roller_init(&layer_roller_widget, screen);
-    lv_obj_set_size(zmk_widget_layer_roller_obj(&layer_roller_widget), 224, 140);
-    lv_obj_align(zmk_widget_layer_roller_obj(&layer_roller_widget), LV_ALIGN_CENTER, 0, -20);
+    //zmk_widget_layer_roller_init(&layer_roller_widget, screen);
+    //lv_obj_set_size(zmk_widget_layer_roller_obj(&layer_roller_widget), 224, 140);
+    //lv_obj_align(zmk_widget_layer_roller_obj(&layer_roller_widget), LV_ALIGN_CENTER, 0, -20);
 
 
     return screen;
