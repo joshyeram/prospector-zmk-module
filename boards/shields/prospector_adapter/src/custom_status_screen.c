@@ -17,7 +17,7 @@
 LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 
 static struct zmk_widget_layer_roller layer_roller_widget;
-static struct zmk_widget_layer_matrix layer_matrix_widget;
+//static struct zmk_widget_layer_matrix layer_matrix_widget;
 static struct zmk_widget_battery_bar battery_bar_widget;
 static struct zmk_widget_caps_word_indicator caps_word_indicator_widget;
 
