@@ -15,6 +15,7 @@ config ZMK_DISPLAY_STATUS_SCREEN_CUSTOM
     select LV_USE_BAR
     select LV_USE_FLEX
     select LV_USE_ROLLER
+    select LV_USE_BTN
     select LV_COLOR_SCREEN_TRANSP
 
 choice ZMK_DISPLAY_WORK_QUEUE
