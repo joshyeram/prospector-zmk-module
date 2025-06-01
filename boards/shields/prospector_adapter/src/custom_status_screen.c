@@ -17,7 +17,7 @@
 LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 
 //static struct zmk_widget_layer_roller layer_roller_widget;
-//static struct zmk_widget_layer_matrix layer_matrix_widget;
+static struct zmk_widget_layer_matrix layer_matrix_widget;
 static struct zmk_widget_battery_bar battery_bar_widget;
 //static struct zmk_widget_caps_word_indicator caps_word_indicator_widget;
 
@@ -30,8 +30,8 @@ lv_obj_t *zmk_display_status_screen() {
     //zmk_widget_caps_word_indicator_init(&caps_word_indicator_widget, screen);
     //lv_obj_align(zmk_widget_caps_word_indicator_obj(&caps_word_indicator_widget), LV_ALIGN_RIGHT_MID, -10, 46);
 
-    //zmk_widget_layer_matrix_init(&layer_matrix_widget, screen);
-    //lv_obj_align(zmk_widget_layer_matrix_obj(&layer_matrix_widget), LV_ALIGN_TOP_MID, 0, 0);
+    zmk_widget_layer_matrix_init(&layer_matrix_widget, screen);
+    lv_obj_align(zmk_widget_layer_matrix_obj(&layer_matrix_widget), LV_ALIGN_TOP_MID, 0, 0);
 
     zmk_widget_battery_bar_init(&battery_bar_widget, screen);
     lv_obj_set_size(zmk_widget_battery_bar_obj(&battery_bar_widget), lv_pct(100), 48);
