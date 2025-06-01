@@ -10,7 +10,7 @@
 #include <zephyr/logging/log.h>
 LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 
-static char layer_roller_status[256] = {0}; // Buffer for concatenated layer names
+static char layer_roller_buffer[256] = {0}; // Buffer for concatenated layer names
 
 static sys_slist_t widgets = SYS_SLIST_STATIC_INIT(&widgets);
 
