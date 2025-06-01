@@ -18,9 +18,9 @@ struct layer_prndl_state
     uint8_t index;
 };
 
-static void layer_prndl_set_sel(lv_obj_t *buttonprndl, struct layer_prndl_state state) 
+static void layer_prndl_set_sel(lv_obj_t *prndl, struct layer_prndl_state state) 
 {
-    lv_label_set_text(widget->obj, "#FF5C00 B# #808080 N# #808080 S# #FF5C00 A#  #808080 M# #FF5C00 M+# #808080 F");
+    lv_label_set_text(prndl, "#FF5C00 B# #808080 N# #808080 S# #FF5C00 A#  #808080 M# #FF5C00 M+# #808080 F");
 }
 
 
