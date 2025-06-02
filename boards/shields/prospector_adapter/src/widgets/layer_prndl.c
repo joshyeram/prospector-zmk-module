@@ -93,7 +93,6 @@ int zmk_widget_layer_prndl_init(struct zmk_widget_layer_prndl *widget, lv_obj_t 
     sys_slist_append(&widgets, &widget->node);
 
     widget_layer_prndl_init();
-    lv_obj_align(prndl, LV_ALIGN_CENTER, 0, 80);
     return 0;
 }
 

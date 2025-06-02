@@ -39,8 +39,6 @@ lv_obj_t *zmk_display_status_screen() {
     //lv_obj_align(zmk_widget_layer_roller_obj(&layer_roller_widget), LV_ALIGN_CENTER, 0, -20);
 
     zmk_widget_layer_prndl_init(&layer_prndl_widget, screen);
-    lv_obj_align(zmk_widget_layer_prndl_obj(&layer_prndl_widget), LV_ALIGN_TOP_MID, 0, 0);
-
-
+    
     return screen;
 }
