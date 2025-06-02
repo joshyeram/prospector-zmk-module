@@ -52,6 +52,7 @@ static void layer_prndl_set_sel(lv_obj_t *prndl, struct layer_prndl_state state)
     {
         lv_label_set_text(prndl, "#808080 B# #808080 N# #808080 S# #808080 A#  #808080 M# #808080 M+# #808080 F");
     }
+    lv_obj_align(widget->obj, LV_ALIGN_CENTER, 0, 30);
 }
 
 
@@ -81,7 +82,7 @@ int zmk_widget_layer_prndl_init(struct zmk_widget_layer_prndl *widget, lv_obj_t 
     lv_label_set_long_mode(widget->obj, LV_LABEL_LONG_WRAP);
     lv_obj_set_style_text_font(widget->obj, &lv_font_unscii_16, 0);
     lv_label_set_recolor(widget->obj, true);
-    lv_obj_set_width(widget->obj, 200);
+    lv_obj_set_width(widget->obj, 270);
     lv_obj_set_style_text_align(widget->obj, LV_TEXT_ALIGN_CENTER, 0);
     lv_obj_align(widget->obj, LV_ALIGN_CENTER, 0, 30);
     lv_label_set_text(widget->obj, "#FF5C00 B# #808080 N# #808080 S# #808080 A#  #808080 M# #808080 M+# #808080 F");
