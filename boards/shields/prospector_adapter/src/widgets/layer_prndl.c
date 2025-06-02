@@ -87,7 +87,7 @@ int zmk_widget_layer_prndl_init(struct zmk_widget_layer_prndl *widget, lv_obj_t 
     lv_obj_set_style_text_align(widget->obj, LV_TEXT_ALIGN_CENTER, 0);    
     // lv_label_set_text(widget->obj, "#FF5C00 B# #808080 N# #808080 S# #808080 A# #808080 M# #808080 M+# #808080 F");
     // lv_obj_align(widget->obj, LV_ALIGN_CENTER, 0, 90);
-    layer_prndl_state temp;
+    struct layer_prndl_state temp;
     temp.index = 0;
     layer_prndl_set_sel(widget->obj, temp);
     sys_slist_append(&widgets, &widget->node);
