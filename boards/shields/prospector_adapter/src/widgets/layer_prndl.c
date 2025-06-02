@@ -28,23 +28,23 @@ static void layer_prndl_set_sel(lv_obj_t *prndl, struct layer_prndl_state state)
     {
         lv_label_set_text(prndl, "#808080 B# #FF5C00 N# #808080 S# #808080 A#  #808080 M# #808080 M+# #808080 F");
     }
-    else if (state.index == 1)
+    else if (state.index == 2)
     {
         lv_label_set_text(prndl, "#808080 B# #808080 N# #FF5C00 S# #808080 A#  #808080 M# #808080 M+# #808080 F");
     }
-    else if (state.index == 1)
+    else if (state.index == 3)
     {
         lv_label_set_text(prndl, "#808080 B# #808080 N# #808080 S# #FF5C00 A#  #808080 M# #808080 M+# #808080 F");
     }
-    else if (state.index == 1)
+    else if (state.index == 4)
     {
         lv_label_set_text(prndl, "#808080 B# #808080 N# #808080 S# #808080 A#  #FF5C00 M# #808080 M+# #808080 F");
     }
-    else if (state.index == 1)
+    else if (state.index == 5)
     {
         lv_label_set_text(prndl, "#808080 B# #808080 N# #808080 S# #808080 A#  #808080 M# #FF5C00 M+# #808080 F");
     }
-    else if (state.index == 1)
+    else if (state.index == 6)
     {
         lv_label_set_text(prndl, "#808080 B# #808080 N# #808080 S# #808080 A#  #808080 M# #808080 M+# #FF5C00 F");
     }
