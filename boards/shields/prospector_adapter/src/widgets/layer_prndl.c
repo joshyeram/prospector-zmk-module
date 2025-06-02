@@ -22,35 +22,35 @@ static void layer_prndl_set_sel(lv_obj_t *prndl, struct layer_prndl_state state)
 {
     if (state.index == 0)
     {
-        lv_label_set_text(prndl, "#FF5C00 B# #808080 N# #808080 S# #808080 A# #808080 M# #808080 M+# #808080 F");
+        lv_label_set_text(prndl, "#FF5C00 B # #808080 N # #808080 S # #808080 A # #808080 M # #808080 M+ # #808080 F");
     }
     else if (state.index == 1)
     {
-        lv_label_set_text(prndl, "#808080 B# #FF5C00 N# #808080 S# #808080 A# #808080 M# #808080 M+# #808080 F");
+        lv_label_set_text(prndl, "#808080 B # #FF5C00 N # #808080 S # #808080 A # #808080 M # #808080 M+ # #808080 F");
     }
     else if (state.index == 2)
     {
-        lv_label_set_text(prndl, "#808080 B# #808080 N# #FF5C00 S# #808080 A# #808080 M# #808080 M+# #808080 F");
+        lv_label_set_text(prndl, "#808080 B # #808080 N # #FF5C00 S # #808080 A # #808080 M # #808080 M+ # #808080 F");
     }
     else if (state.index == 3)
     {
-        lv_label_set_text(prndl, "#808080 B# #808080 N# #808080 S# #FF5C00 A# #808080 M# #808080 M+# #808080 F");
+        lv_label_set_text(prndl, "#808080 B # #808080 N # #808080 S # #FF5C00 A # #808080 M # #808080 M+ # #808080 F");
     }
     else if (state.index == 4)
     {
-        lv_label_set_text(prndl, "#808080 B# #808080 N# #808080 S# #808080 A# #FF5C00 M# #808080 M+# #808080 F");
+        lv_label_set_text(prndl, "#808080 B # #808080 N # #808080 S # #808080 A # #FF5C00 M # #808080 M+ # #808080 F");
     }
     else if (state.index == 5)
     {
-        lv_label_set_text(prndl, "#808080 B# #808080 N# #808080 S# #808080 A# #808080 M# #FF5C00 M+# #808080 F");
+        lv_label_set_text(prndl, "#808080 B # #808080 N # #808080 S # #808080 A # #808080 M # #FF5C00 M+ # #808080 F");
     }
     else if (state.index == 6)
     {
-        lv_label_set_text(prndl, "#808080 B# #808080 N# #808080 S# #808080 A# #808080 M# #808080 M+# #FF5C00 F");
+        lv_label_set_text(prndl, "#808080 B # #808080 N # #808080 S # #808080 A # #808080 M # #808080 M+ # #FF5C00 F");
     }
     else
     {
-        lv_label_set_text(prndl, "#808080 B# #808080 N# #808080 S# #808080 A# #808080 M# #808080 M+# #808080 F");
+        lv_label_set_text(prndl, "#808080 B # #808080 N # #808080 S # #808080 A # #808080 M # #808080 M+ # #808080 F");
     }
     lv_obj_align(prndl, LV_ALIGN_CENTER, 0, 90);
 }
@@ -81,7 +81,7 @@ int zmk_widget_layer_prndl_init(struct zmk_widget_layer_prndl *widget, lv_obj_t 
     widget->obj = lv_label_create(parent);
     lv_label_set_long_mode(widget->obj, LV_LABEL_LONG_WRAP);
     //lv_obj_set_style_text_font(widget->obj, &lv_font_unscii_16, 0);
-    lv_obj_set_style_text_font(widget->obj, &lv_font_montserrat_12, 0);
+    lv_obj_set_style_text_font(widget->obj, &lv_font_montserrat_20, 0);
     lv_label_set_recolor(widget->obj, true);
     lv_obj_set_width(widget->obj, 270);
     lv_obj_set_style_text_align(widget->obj, LV_TEXT_ALIGN_CENTER, 0);    
