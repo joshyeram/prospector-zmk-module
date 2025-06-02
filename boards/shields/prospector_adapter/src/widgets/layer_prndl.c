@@ -52,7 +52,7 @@ static void layer_prndl_set_sel(lv_obj_t *prndl, struct layer_prndl_state state)
     {
         lv_label_set_text(prndl, "#808080 B # #808080 N # #808080 S # #808080 A # #808080 M # #808080 M+ # #808080 F");
     }
-    lv_obj_align(prndl, LV_ALIGN_CENTER, 0, 90);
+    lv_obj_align(prndl, LV_ALIGN_CENTER, 0, 80);
 }
 
 
@@ -93,6 +93,7 @@ int zmk_widget_layer_prndl_init(struct zmk_widget_layer_prndl *widget, lv_obj_t 
     sys_slist_append(&widgets, &widget->node);
 
     widget_layer_prndl_init();
+    lv_obj_align(prndl, LV_ALIGN_CENTER, 0, 80);
     return 0;
 }
 
