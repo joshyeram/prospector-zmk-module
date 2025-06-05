@@ -50,7 +50,7 @@ int zmk_widget_wpm_ind_init(struct zmk_widget_wpm_ind *widget, lv_obj_t *parent)
     lv_obj_align(widget->obj, LV_ALIGN_CENTER, 0, -25);
     lv_meter_scale_t * scale = lv_meter_add_scale(widget->obj);
 
-    lv_obj_set_style_text_color(widget->obj, lv_color_white(), LV_PART_TICK);
+    lv_obj_set_style_text_color(widget->obj, lv_color_white(), LV_PART_TICKS);
     lv_meter_set_scale_ticks(widget->obj, scale, 41, 2, 4, lv_color_white());
     lv_meter_set_scale_major_ticks(widget->obj, scale, 10, 6, 12, lv_color_white(), 10);
     lv_meter_set_scale_range(widget->obj, scale, 0, 150, 240, 150);
