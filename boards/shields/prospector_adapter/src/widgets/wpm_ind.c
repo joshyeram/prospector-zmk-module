@@ -22,6 +22,14 @@ struct wpm_ind_state
 static void wpm_ind_set_sel(lv_obj_t *ind, struct wpm_ind_state state) 
 {
     lv_meter_set_indicator_value(ind, indic, state.wpm);
+    if(state.wpm < 90)
+    {
+        lv_obj_set_style_text_color(widget->obj, lv_palette_main(LV_PALETTE_GREY), LV_PART_INDICATOR);
+    }
+    else
+    {
+        lv_obj_set_style_text_color(widget->obj, lv_palette_main(LV_PALETTE_GREEN), LV_PART_INDICATOR);
+    }
 }
 
 static void wpm_ind_update_cb(struct wpm_ind_state state) 
@@ -52,7 +60,7 @@ int zmk_widget_wpm_ind_init(struct zmk_widget_wpm_ind *widget, lv_obj_t *parent)
 
     lv_obj_set_style_text_color(widget->obj, lv_color_white(), LV_PART_TICKS);
     lv_obj_set_style_text_font(widget->obj, &lv_font_montserrat_12, LV_PART_TICKS);
-    lv_meter_set_scale_ticks(widget->obj, scale, 15, 4, 8, lv_color_white());
+    lv_meter_set_scale_ticks(widget->obj, scale, 16, 4, 8, lv_color_white());
     lv_meter_set_scale_major_ticks(widget->obj, scale, 2, 6, 12, lv_color_white(), 10);
     lv_meter_set_scale_range(widget->obj, scale, 0, 150, 240, 150);
 
@@ -71,7 +79,7 @@ int zmk_widget_wpm_ind_init(struct zmk_widget_wpm_ind *widget, lv_obj_t *parent)
     lv_meter_set_indicator_start_value(widget->obj, indic, 90);
     lv_meter_set_indicator_end_value(widget->obj, indic, 150);
 
-    indic = lv_meter_add_needle_line(widget->obj, scale, 4, lv_palette_main(LV_PALETTE_GREY), -10);
+    indic = lv_meter_add_needle_line(widget->obj, scale, 4, lv_palette_main(LV_PALETTE_GREY), -15);
 
     sys_slist_append(&widgets, &widget->node);
     widget_wpm_ind_init();
