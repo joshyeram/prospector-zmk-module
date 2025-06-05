@@ -46,17 +46,22 @@ ZMK_SUBSCRIPTION(widget_wpm_ind, zmk_wpm_state_changed);
 int zmk_widget_wpm_ind_init(struct zmk_widget_wpm_ind *widget, lv_obj_t *parent)
 {
     widget->obj = lv_meter_create(parent);
-    lv_obj_set_size(widget->obj, 125, 125);
-    lv_obj_align(widget->obj, LV_ALIGN_CENTER, 0, -30);
+    lv_obj_set_size(widget->obj, 175, 175);
+    lv_obj_align(widget->obj, LV_ALIGN_CENTER, 0, -55);
     lv_meter_scale_t * scale = lv_meter_add_scale(widget->obj);
 
     lv_meter_set_scale_ticks(widget->obj, scale, 41, 1, 3, lv_color_white());
     lv_meter_set_scale_major_ticks(widget->obj, scale, 8, 3, 6, lv_color_white(), 10);
-    lv_meter_set_scale_range(widget->obj, scale, 0, 200, 260, 90);
+    lv_meter_set_scale_range(widget->obj, scale, 0, 200, 240, 150);
+
+    /*Add a white arc to the red*/
+    indic = lv_meter_add_arc(widget->obj, scale, 3, lv_color_white(), 0);
+    lv_meter_set_indicator_start_value(widget->obj, indic, 0);
+    lv_meter_set_indicator_end_value(widget->obj, indic, 120);
 
     /*Add a red arc to the end*/
     indic = lv_meter_add_arc(widget->obj, scale, 3, lv_palette_main(LV_PALETTE_RED), 0);
-    lv_meter_set_indicator_start_value(widget->obj, indic, 100);
+    lv_meter_set_indicator_start_value(widget->obj, indic, 120);
     lv_meter_set_indicator_end_value(widget->obj, indic, 200);
 
     /*Make the tick lines red at the end of the scale*/
