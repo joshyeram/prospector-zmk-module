@@ -24,11 +24,11 @@ static void wpm_ind_set_sel(lv_obj_t *ind, struct wpm_ind_state state)
     lv_meter_set_indicator_value(ind, indic, state.wpm);
     if(state.wpm < 90)
     {
-        lv_style_set_line_color(ind, lv_palette_main(LV_PALETTE_GREY));
+        lv_obj_set_style_line_color(ind, lv_palette_main(LV_PALETTE_GREY), LV_PART_INDICATOR);
     }
     else
     {
-        lv_style_set_line_color(ind, lv_palette_main(LV_PALETTE_GREEN));
+        lv_obj_set_style_line_color(ind, lv_palette_main(LV_PALETTE_GREEN), LV_PART_INDICATOR);
     }
 }
 
