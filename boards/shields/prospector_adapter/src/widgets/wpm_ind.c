@@ -27,13 +27,16 @@ static void wpm_ind_set(lv_obj_t *meter, struct wpm_ind_state state)
 
 static void wpm_ind_set_sel(lv_obj_t *meter, struct wpm_ind_state state) 
 {
-    lv_anim_t a;
-    lv_anim_init(&a);
-    lv_anim_set_exec_cb(&a, wpm_ind_set);
-    lv_anim_set_var(&a, meter);
-    lv_anim_set_values(&a, currentWpm, state.wpm);
-    lv_anim_set_time(&a, 1000);
-    lv_anim_start(&a);
+    if(state.wpm != currentWpm)
+    {
+        lv_anim_t a;
+        lv_anim_init(&a);
+        lv_anim_set_exec_cb(&a, wpm_ind_set);
+        lv_anim_set_var(&a, meter);
+        lv_anim_set_values(&a, currentWpm, state.wpm);
+        lv_anim_set_time(&a, 1000);
+        lv_anim_start(&a);
+    }
     currentWpm = state.wpm;
 }
 
