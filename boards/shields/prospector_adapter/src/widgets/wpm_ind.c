@@ -63,7 +63,7 @@ int zmk_widget_wpm_ind_init(struct zmk_widget_wpm_ind *widget, lv_obj_t *parent)
     lv_meter_set_indicator_start_value(widget->obj, indic, 100);
     lv_meter_set_indicator_end_value(widget->obj, indic, 200);
 
-    indic = lv_meter_add_needle_line(idget->obj, scale, 4, lv_palette_main(LV_PALETTE_GREY), -10);
+    indic = lv_meter_add_needle_line(widget->obj, scale, 4, lv_palette_main(LV_PALETTE_GREY), -10);
 
     sys_slist_append(&widgets, &widget->node);
     widget_wpm_ind_init();
