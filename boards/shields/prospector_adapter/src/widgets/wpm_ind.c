@@ -50,9 +50,9 @@ int zmk_widget_wpm_ind_init(struct zmk_widget_wpm_ind *widget, lv_obj_t *parent)
     lv_obj_align(widget->obj, LV_ALIGN_CENTER, 0, -30);
     lv_meter_scale_t * scale = lv_meter_add_scale(widget->obj);
 
-    lv_meter_set_scale_ticks(widget->obj, scale, 41, 1, 3, lv_palette_main(LV_PALETTE_GREY));
-    lv_meter_set_scale_major_ticks(widget->obj, scale, 8, 3, 6, lv_color_black(), 10);
-    lv_meter_set_scale_range(widget->obj, scale, 0, 200, 270, 0);
+    lv_meter_set_scale_ticks(widget->obj, scale, 41, 1, 3, lv_palette_main(LV_PALETTE_WHITE));
+    lv_meter_set_scale_major_ticks(widget->obj, scale, 8, 3, 6, lv_palette_main(LV_PALETTE_WHITE), 10);
+    lv_meter_set_scale_range(widget->obj, scale, 0, 200, 260, 90);
 
     /*Add a red arc to the end*/
     indic = lv_meter_add_arc(widget->obj, scale, 3, lv_palette_main(LV_PALETTE_RED), 0);
