@@ -13,23 +13,28 @@ LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 
 static sys_slist_t widgets = SYS_SLIST_STATIC_INIT(&widgets);
 static lv_meter_indicator_t * indic;
+static uint8_t currentWpm = 0;
 
 struct wpm_ind_state 
 {
     uint8_t wpm;
 };
 
-static void wpm_ind_set_sel(lv_obj_t *ind, struct wpm_ind_state state) 
+static void wpm_ind_set(lv_obj_t *meter, struct wpm_ind_state state) 
 {
-    lv_meter_set_indicator_value(ind, indic, state.wpm);
-    if(state.wpm < 90)
-    {
-        lv_obj_set_style_line_color(ind, lv_palette_main(LV_PALETTE_GREY), LV_PART_INDICATOR);
-    }
-    else
-    {
-        lv_obj_set_style_line_color(ind, lv_palette_main(LV_PALETTE_GREEN), LV_PART_INDICATOR);
-    }
+    lv_meter_set_indicator_value(meter, indic, state.wpm);
+}
+
+static void wpm_ind_set_sel(lv_obj_t *meter, struct wpm_ind_state state) 
+{
+    lv_anim_t a;
+    lv_anim_init(&a);
+    lv_anim_set_exec_cb(&a, wpm_ind_set);
+    lv_anim_set_var(&a, meter);
+    lv_anim_set_values(&a, currentWpm, state.wpm);
+    lv_anim_set_time(&a, 1000);
+    lv_anim_start(&a);
+    currentWpm = state.wpm;
 }
 
 static void wpm_ind_update_cb(struct wpm_ind_state state) 
