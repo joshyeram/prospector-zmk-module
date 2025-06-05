@@ -15,7 +15,6 @@ static lv_meter_indicator_t * indic;
 
 struct wpm_ind_state 
 {
-    lv_meter_indicator_t * indic;
     uint8_t wpm;
 };
 
@@ -33,13 +32,11 @@ static void wpm_ind_update_cb(struct wpm_ind_state state)
     }
 }
 
-static struct wpm_ind_state wpm_ind_get_state(const zmk_event_t *eh) {
-    struct zmk_widget_wpm_ind *ev = as_zmk_wpm_state_changed(eh);
+static struct wpm_ind_state wpm_ind_get_state(const zmk_event_t *eh) 
+{
+    struct zmk_wpm_state_changed *ev = as_zmk_wpm_state_changed(eh);
     LOG_INF("wpm is  %d", ev->state);
-    return (struct wpm_ind_state) 
-    {
-        .wpm = ev->state
-    };
+    return (struct wpm_ind_state){.wpm = ev->state};
 }
 
 ZMK_DISPLAY_WIDGET_LISTENER(widget_wpm_ind, struct wpm_ind_state, wpm_ind_update_cb, wpm_ind_get_state)
@@ -50,7 +47,7 @@ int zmk_widget_wpm_ind_init(struct zmk_widget_wpm_ind *widget, lv_obj_t *parent)
     widget->obj = lv_meter_create(parent);
     lv_obj_set_size(widget->obj, 125, 125);
     lv_meter_scale_t * scale = lv_meter_add_scale(widget->obj);
-    
+
     lv_meter_set_scale_ticks(widget->obj, scale, 41, 1, 3, lv_palette_main(LV_PALETTE_GREY));
     lv_meter_set_scale_major_ticks(widget->obj, scale, 8, 3, 6, lv_color_black(), 10);
     lv_meter_set_scale_range(widget->obj, scale, 0, 200, 270, 0);
@@ -68,7 +65,6 @@ int zmk_widget_wpm_ind_init(struct zmk_widget_wpm_ind *widget, lv_obj_t *parent)
     indic = lv_meter_add_needle_line(idget->obj, scale, 4, lv_palette_main(LV_PALETTE_GREY), -10);
 
     sys_slist_append(&widgets, &widget->node);
-
     widget_wpm_ind_init();
     return 0;
 }
