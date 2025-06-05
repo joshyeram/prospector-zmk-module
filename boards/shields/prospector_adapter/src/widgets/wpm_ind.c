@@ -51,8 +51,9 @@ int zmk_widget_wpm_ind_init(struct zmk_widget_wpm_ind *widget, lv_obj_t *parent)
     lv_meter_scale_t * scale = lv_meter_add_scale(widget->obj);
 
     lv_obj_set_style_text_color(widget->obj, lv_color_white(), LV_PART_TICKS);
-    lv_meter_set_scale_ticks(widget->obj, scale, 41, 2, 4, lv_color_white());
-    lv_meter_set_scale_major_ticks(widget->obj, scale, 10, 6, 12, lv_color_white(), 10);
+    lv_obj_set_style_text_font(widget->obj, &lv_font_montserrat_12, LV_PART_TICKS);
+    lv_meter_set_scale_ticks(widget->obj, scale, 15, 4, 8, lv_color_white());
+    lv_meter_set_scale_major_ticks(widget->obj, scale, 2, 6, 12, lv_color_white(), 10);
     lv_meter_set_scale_range(widget->obj, scale, 0, 150, 240, 150);
 
     /*Add a white arc to the red*/
