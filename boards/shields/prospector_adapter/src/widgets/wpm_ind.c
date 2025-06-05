@@ -47,6 +47,7 @@ int zmk_widget_wpm_ind_init(struct zmk_widget_wpm_ind *widget, lv_obj_t *parent)
 {
     widget->obj = lv_meter_create(parent);
     lv_obj_set_size(widget->obj, 125, 125);
+    lv_obj_align(widget->obj, LV_ALIGN_CENTER, 0, -30);
     lv_meter_scale_t * scale = lv_meter_add_scale(widget->obj);
 
     lv_meter_set_scale_ticks(widget->obj, scale, 41, 1, 3, lv_palette_main(LV_PALETTE_GREY));
