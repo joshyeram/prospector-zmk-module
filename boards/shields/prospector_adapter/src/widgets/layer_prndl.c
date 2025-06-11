@@ -10,7 +10,16 @@
 #include <zephyr/logging/log.h>
 LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 
-const char * layer_map[] = {"base", "num", "sym",  "arr", "\n", "media", "mouse", "funct", NULL};
+#define DEFAULT 0
+#define MEDIA 1
+#define SYMBOL 6
+
+#define NUMBER 2
+#define ARROW 3
+#define MOUSE 4
+#define FUNC 5
+
+
 static sys_slist_t widgets = SYS_SLIST_STATIC_INIT(&widgets);
 
 struct layer_prndl_state 
@@ -20,37 +29,38 @@ struct layer_prndl_state
 
 static void layer_prndl_set_sel(lv_obj_t *prndl, struct layer_prndl_state state) 
 {
-    if (state.index == 0)
+
+    if (state.index == DEFAULT)
     {
-        lv_label_set_text(prndl, "#FF5C00 B # #808080 N # #808080 S # #808080 A # #808080 M # #808080 M+ # #808080 F");
+        lv_label_set_text(prndl, "#FF5C00 B # #808080 M # #808080 S # #808080 N #  #808080 A #  #808080 M+ # #808080 F#");
     }
-    else if (state.index == 1)
+    else if (state.index == MEDIA)
     {
-        lv_label_set_text(prndl, "#808080 B # #FF5C00 N # #808080 S # #808080 A # #808080 M # #808080 M+ # #808080 F");
+        lv_label_set_text(prndl, "#808080 B # #FF5C00 M # #808080 S # #808080 N #  #808080 A #  #808080 M+ # #808080 F#");
     }
-    else if (state.index == 2)
+    else if (state.index == SYMBOL)
     {
-        lv_label_set_text(prndl, "#808080 B # #808080 N # #FF5C00 S # #808080 A # #808080 M # #808080 M+ # #808080 F");
+        lv_label_set_text(prndl, "#808080 B # #808080 M # #FF5C00 S # #808080 N #  #808080 A #  #808080 M+ # #808080 F#");
     }
-    else if (state.index == 3)
+    else if (state.index == NUMBER)
     {
-        lv_label_set_text(prndl, "#808080 B # #808080 N # #808080 S # #FF5C00 A # #808080 M # #808080 M+ # #808080 F");
+        lv_label_set_text(prndl, "#808080 B # #808080 M # #808080 S # #FF5C00 N #  #808080 A #  #808080 M+ # #808080 F#");
     }
-    else if (state.index == 4)
+    else if (state.index == ARROW)
     {
-        lv_label_set_text(prndl, "#808080 B # #808080 N # #808080 S # #808080 A # #FF5C00 M # #808080 M+ # #808080 F");
+        lv_label_set_text(prndl, "#808080 B # #808080 M # #808080 S # #808080 N #  #FF5C00 A #  #808080 M+ # #808080 F#");
     }
-    else if (state.index == 5)
+    else if (state.index == MOUSE)
     {
-        lv_label_set_text(prndl, "#808080 B # #808080 N # #808080 S # #808080 A # #808080 M # #FF5C00 M+ # #808080 F");
+        lv_label_set_text(prndl, "#808080 B # #808080 M # #808080 S # #808080 N #  #808080 A #  #FF5C00 M+ # #808080 F#");
     }
-    else if (state.index == 6)
+    else if (state.index == FUNC)
     {
-        lv_label_set_text(prndl, "#808080 B # #808080 N # #808080 S # #808080 A # #808080 M # #808080 M+ # #FF5C00 F");
+        lv_label_set_text(prndl, "#808080 B # #808080 M # #808080 S # #808080 N #  #808080 A #  #808080 M+ # #FF5C00 F#");
     }
     else
     {
-        lv_label_set_text(prndl, "#808080 B # #808080 N # #808080 S # #808080 A # #808080 M # #808080 M+ # #808080 F");
+        lv_label_set_text(prndl, "#808080 B # #808080 M # #808080 S # #808080 N #  #808080 A #  #808080 M+ # #808080 F#");
     }
 }
 
