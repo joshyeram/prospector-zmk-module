@@ -63,8 +63,4 @@ config PWM
 config LED
     default y
 
-config PROSPECTOR_USE_AMBIENT_LIGHT_SENSOR
-    select SENSOR
-    select APDS9960
-
 endif
