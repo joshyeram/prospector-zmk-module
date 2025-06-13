@@ -68,8 +68,7 @@ keymap {
 To customize, add config options to your `config/[YOUR KEYBOARD SHIELD].conf` like so:
 
 ```ini
-CONFIG_PROSPECTOR_USE_AMBIENT_LIGHT_SENSOR=n
-CONFIG_PROSPECTOR_FIXED_BRIGHTNESS=80
+
 ```
 
 ### Available config options:
