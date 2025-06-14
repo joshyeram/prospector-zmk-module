@@ -20,15 +20,6 @@
 		};
 	};
 
-	spi3_sleep: spi3_sleep {
-		group1 {
-			psels = <NRF_PSEL(SPIM_SCK, 1, 13)>,
-				<NRF_PSEL(SPIM_MOSI, 1, 15)>,
-				<NRF_PSEL(SPIM_MISO, 1, 11)>;
-			low-power-enable;
-		};
-	};
-
    pwm1_default: pwm1_default {
       group1 {
          psels = <NRF_PSEL(PWM_OUT0, 0, 10)>;
@@ -36,19 +27,12 @@
       };
    };
 
-   pwm1_sleep: pwm1_sleep {
-      group1 {
-         psels = <NRF_PSEL(PWM_OUT0, 0, 10)>;
-         low-power-enable;
-      };
-   };
 };
 
 disp_spi: &spi3 {
    status = "okay";
    pinctrl-0 = <&spi3_default>;
-	pinctrl-1 = <&spi3_sleep>;
-	pinctrl-names = "default", "sleep";
+	pinctrl-names = "default";
    cs-gpios = <&gpio1 6 GPIO_ACTIVE_LOW>; //CS
 
    st7789: st7789v@0 {
@@ -93,6 +77,5 @@ disp_spi: &spi3 {
 &pwm1 {
   status = "okay";
   pinctrl-0 = <&pwm1_default>;
-  pinctrl-1 = <&pwm1_sleep>;
-  pinctrl-names = "default", "sleep";
+  pinctrl-names = "default";
 };
