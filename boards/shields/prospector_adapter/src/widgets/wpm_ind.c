@@ -24,7 +24,7 @@ struct wpm_ind_state
 
 struct wpm_ind_visual_state 
 {
-    zmk_activity_state act;
+    enum zmk_activity_state act;
 };
 
 static void wpm_ind_set(lv_obj_t *meter, struct wpm_ind_state state) 
