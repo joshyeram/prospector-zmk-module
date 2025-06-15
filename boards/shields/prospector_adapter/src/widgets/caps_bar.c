@@ -1,14 +1,13 @@
 #include "caps_bar.h"
 
 #include <ctype.h>
+#include <zephyr/kernel.h>
 #include <zmk/display.h>
 #include <zmk/event_manager.h>
-#include <zmk/keymap.h>
-#include <zmk/events/activity_state_changed.h>
-#include <zmk/events/hid_indicators_changed.h>
-#include <zmk/hid_indicators_types.h>
 #include <zmk/activity.h>
-#include <zephyr/kernel.h>
+#include <zmk/events/activity_state_changed.h>
+#include <zmk/hid_indicators_types.h>
+#include <zmk/events/hid_indicators_changed.h>
 #include <zephyr/logging/log.h>
 LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 
@@ -21,7 +20,7 @@ static bool lastActive = false;
 
 struct caps_bar_state 
 {    
-    uint8_t ind;
+    zmk_hid_indicators_t ind;
 };
 
 struct caps_bar_visual_state 
