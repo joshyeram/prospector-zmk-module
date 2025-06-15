@@ -28,9 +28,9 @@ lv_obj_t *zmk_display_status_screen()
     lv_obj_set_style_bg_color(screen, lv_color_hex(0x000000), LV_PART_MAIN);
     lv_obj_set_style_bg_opa(screen, 255, LV_PART_MAIN);
 
-    //zmk_widget_layer_prndl_init(&layer_prndl_widget, screen);
+    zmk_widget_layer_prndl_init(&layer_prndl_widget, screen);
 
-    //zmk_widget_wpm_ind_init(&wpm_ind_widget, screen);
+    zmk_widget_wpm_ind_init(&wpm_ind_widget, screen);
 
     zmk_widget_caps_bar_init(&caps_bar_widget, screen);
 
