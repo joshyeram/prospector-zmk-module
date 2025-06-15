@@ -6,6 +6,7 @@
 #include "widgets/layer_prndl.h"
 #include "widgets/battery_bar.h"
 #include "widgets/wpm_ind.h"
+#include "widgets/caps_bar.h"
 
 #include <fonts.h>
 #include <sf_symbols.h>
@@ -18,6 +19,7 @@ LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 static struct zmk_widget_layer_prndl layer_prndl_widget;
 static struct zmk_widget_battery_bar battery_bar_widget;
 static struct zmk_widget_wpm_ind     wpm_ind_widget;
+static struct zmk_widget_caps_bar    caps_bar_widget;
 
 lv_obj_t *zmk_display_status_screen() 
 {
@@ -29,6 +31,8 @@ lv_obj_t *zmk_display_status_screen()
     zmk_widget_layer_prndl_init(&layer_prndl_widget, screen);
 
     zmk_widget_wpm_ind_init(&wpm_ind_widget, screen);
+
+    zmk_widget_caps_bar_init(&caps_bar_widget, screen);
 
     zmk_widget_battery_bar_init(&battery_bar_widget, screen);
     lv_obj_set_size(zmk_widget_battery_bar_obj(&battery_bar_widget), lv_pct(100), 48);
