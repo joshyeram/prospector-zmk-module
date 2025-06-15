@@ -67,10 +67,12 @@ static void wpm_ind_toggle_sel(lv_obj_t *meter, struct wpm_ind_visual_state stat
 {   
     if(!state.hidden)
     {
+        LOG_INF("should be hidden");
         lv_obj_add_flag(meter, LV_OBJ_FLAG_HIDDEN);
     }   
     else
     {
+        LOG_INF("should be un-hidden");
         lv_obj_clear_flag(meter, LV_OBJ_FLAG_HIDDEN);
     }
 }
@@ -81,13 +83,21 @@ static void wpm_ind_vis_toggle_update_cb(struct wpm_ind_visual_state state)
     SYS_SLIST_FOR_EACH_CONTAINER(&widgets, widget, node) 
     {
         wpm_ind_toggle_sel(widget->obj, state);
+        LOG_INF("ran toggle");
     }
 }
 
 static struct wpm_ind_visual_state wpm_ind_vis_toggle_get_state(const zmk_event_t *eh) 
 {
     struct zmk_wpm_state_changed *ev = as_zmk_wpm_state_changed(eh);
-    LOG_INF("avtivity is  %d", ev->state);
+    if(ev->state)
+    {
+        LOG_INF("avtivity is true");
+    }
+    else
+    {
+        LOG_INF("avtivity is false");
+    }
     return (struct wpm_ind_visual_state){.hidden = ev->state};
 }
 
