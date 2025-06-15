@@ -65,7 +65,7 @@ static struct wpm_ind_state wpm_ind_get_state(const zmk_event_t *eh)
 
 static void wpm_ind_toggle_sel(lv_obj_t *meter, struct wpm_ind_visual_state state) 
 {   
-    if(state.hidden)
+    if(!state.hidden)
     {
         lv_obj_add_flag(meter, LV_OBJ_FLAG_HIDDEN);
     }   
