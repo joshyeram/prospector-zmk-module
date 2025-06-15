@@ -23,10 +23,10 @@ struct caps_bar_state
     zmk_hid_indicators_t ind;
 };
 
-// struct caps_bar_visual_state 
-// {
-//     enum zmk_activity_state act;
-// };
+struct caps_bar_visual_state 
+{
+    enum zmk_activity_state act;
+};
 
 static void caps_bar_set(lv_obj_t *bar, struct caps_bar_state state) 
 {
@@ -110,7 +110,7 @@ int zmk_widget_caps_bar_init(struct zmk_widget_caps_bar *widget, lv_obj_t *paren
     lv_obj_clear_flag(widget->obj, LV_OBJ_FLAG_HIDDEN);
     sys_slist_append(&widgets, &widget->node);
     widget_caps_bar_init();
-    //widget_caps_bar_vis_toggle_init();
+    widget_caps_bar_vis_toggle_init();
     return 0;
 }
 
