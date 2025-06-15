@@ -89,11 +89,12 @@ static struct wpm_ind_visual_state wpm_ind_vis_toggle_get_state(const zmk_event_
     LOG_INF("avtivity is  %d", ev->state);
     return (struct wpm_ind_visual_state){.hidden = ev->state};
 }
+
 //                           id?                       struct with only wpm,        some contaner,                   after getting wpm state change, return a struct with wpm copy                
 ZMK_DISPLAY_WIDGET_LISTENER(widget_wpm_ind,            struct wpm_ind_state,        wpm_ind_update_cb,               wpm_ind_get_state)
-ZMK_SUBSCRIPTION(widget_wpm_ind,           zmk_wpm_state_changed);
+ZMK_SUBSCRIPTION(widget_wpm_ind,            zmk_wpm_state_changed);
 
-ZMK_DISPLAY_WIDGET_LISTENER(widget_wpm_ind_vis_toggle, struct wpm_ind_visual_state, wpm_ind_vis_toggle_update_cb, wpm_ind_vis_toggle_get_state)
+ZMK_DISPLAY_WIDGET_LISTENER(widget_wpm_ind_vis_toggle, struct wpm_ind_visual_state, wpm_ind_vis_toggle_update_cb,    wpm_ind_vis_toggle_get_state)
 ZMK_SUBSCRIPTION(widget_wpm_ind_vis_toggle, zmk_activity_state_changed);
 
 int zmk_widget_wpm_ind_init(struct zmk_widget_wpm_ind *widget, lv_obj_t *parent)
@@ -128,7 +129,7 @@ int zmk_widget_wpm_ind_init(struct zmk_widget_wpm_ind *widget, lv_obj_t *parent)
 
     sys_slist_append(&widgets, &widget->node);
     widget_wpm_ind_init();
-    widget_wpm_ind_vis_toggle();
+    widget_wpm_ind_vis_toggle_init();
     return 0;
 }
 
