@@ -1,4 +1,5 @@
 #include "caps_bar.h"
+
 #include <ctype.h>
 #include <zmk/display.h>
 #include <zmk/events/activity_state_changed.h>
@@ -11,6 +12,7 @@
 LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 
 static sys_slist_t widgets = SYS_SLIST_STATIC_INIT(&widgets);
+static bool lastKnown = false;
 
 struct caps_bar_state 
 {
@@ -26,11 +28,13 @@ static void caps_bar_set_sel(lv_obj_t *bar, struct caps_bar_state state)
 {
     if (state.active) 
     {
-        lv_obj_add_flag(bar, LV_OBJ_FLAG_HIDDEN);
+        lv_obj_clear_flag(bar, LV_OBJ_FLAG_HIDDEN);
+        lastKnown = true;
     } 
     else 
     {
-        lv_obj_clear_flag(bar, LV_OBJ_FLAG_HIDDEN);
+        lv_obj_add_flag(bar, LV_OBJ_FLAG_HIDDEN);
+        lastKnown = false;
     }
 }
 
@@ -56,7 +60,7 @@ static void caps_bar_toggle_sel(lv_obj_t *bar, struct caps_bar_visual_state stat
     {
         lv_obj_add_flag(bar, LV_OBJ_FLAG_HIDDEN);
     }   
-    else if (state.act == ZMK_ACTIVITY_ACTIVE)
+    else if (state.act == ZMK_ACTIVITY_ACTIVE && lastKnown)
     {
         lv_obj_clear_flag(bar, LV_OBJ_FLAG_HIDDEN);
     }
