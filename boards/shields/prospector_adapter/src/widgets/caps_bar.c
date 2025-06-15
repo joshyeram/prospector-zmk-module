@@ -92,6 +92,7 @@ int zmk_widget_caps_bar_init(struct zmk_widget_caps_bar *widget, lv_obj_t *paren
     widget->obj = lv_bar_create(parent);
     lv_obj_set_size(widget->obj, 150, 7);
     lv_obj_align(widget->obj, LV_ALIGN_CENTER, 0, 50);  
+    lv_bar_set_value(widget->obj, 100, LV_ANIM_OFF);
 
     struct caps_bar_state temp;
     temp.active = false;
