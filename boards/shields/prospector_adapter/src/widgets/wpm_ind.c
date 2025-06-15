@@ -20,6 +20,11 @@ struct wpm_ind_state
     uint8_t wpm;
 };
 
+struct wpm_ind_visual_state 
+{
+    bool hidden;
+};
+
 static void wpm_ind_set(lv_obj_t *meter, struct wpm_ind_state state) 
 {
     lv_meter_set_indicator_value(meter, indic, state.wpm);
@@ -56,8 +61,40 @@ static struct wpm_ind_state wpm_ind_get_state(const zmk_event_t *eh)
     return (struct wpm_ind_state){.wpm = ev->state};
 }
 
-ZMK_DISPLAY_WIDGET_LISTENER(widget_wpm_ind, struct wpm_ind_state, wpm_ind_update_cb, wpm_ind_get_state)
-ZMK_SUBSCRIPTION(widget_wpm_ind, zmk_wpm_state_changed);
+
+static void wpm_ind_toggle_sel(lv_obj_t *meter, struct wpm_ind_visual_state state) 
+{   
+    if(state.hidden)
+    {
+        lv_obj_add_flag(meter, LV_OBJ_FLAG_HIDDEN);
+    }   
+    else
+    {
+        lv_obj_clear_flag(meter, LV_OBJ_FLAG_HIDDEN);
+    }
+}
+
+static void wpm_ind_vis_toggle_update_cb(struct wpm_ind_visual_state state) 
+{ 
+    struct zmk_widget_wpm_ind *widget;
+    SYS_SLIST_FOR_EACH_CONTAINER(&widgets, widget, node) 
+    {
+        wpm_ind_toggle_sel(widget->obj, state);
+    }
+}
+
+static struct wpm_ind_visual_state wpm_ind_vis_toggle_get_state(const zmk_event_t *eh) 
+{
+    struct zmk_wpm_state_changed *ev = as_zmk_wpm_state_changed(eh);
+    LOG_INF("avtivity is  %d", ev->state);
+    return (struct wpm_ind_visual_state){.hidden = ev->state};
+}
+//                           id?                       struct with only wpm,        some contaner,                   after getting wpm state change, return a struct with wpm copy                
+ZMK_DISPLAY_WIDGET_LISTENER(widget_wpm_ind,            struct wpm_ind_state,        wpm_ind_update_cb,               wpm_ind_get_state)
+ZMK_SUBSCRIPTION(widget_wpm_ind,           zmk_wpm_state_changed);
+
+ZMK_DISPLAY_WIDGET_LISTENER(widget_wpm_ind_vis_toggle, struct wpm_ind_visual_state, wpm_ind_vis_toggle_update_cb, wpm_ind_vis_toggle_get_state)
+ZMK_SUBSCRIPTION(widget_wpm_ind_vis_toggle, zmk_activity_state_changed);
 
 int zmk_widget_wpm_ind_init(struct zmk_widget_wpm_ind *widget, lv_obj_t *parent)
 {
@@ -91,6 +128,7 @@ int zmk_widget_wpm_ind_init(struct zmk_widget_wpm_ind *widget, lv_obj_t *parent)
 
     sys_slist_append(&widgets, &widget->node);
     widget_wpm_ind_init();
+    widget_wpm_ind_vis_toggle();
     return 0;
 }
 
