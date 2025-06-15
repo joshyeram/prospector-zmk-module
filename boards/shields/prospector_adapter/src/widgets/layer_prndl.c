@@ -3,6 +3,8 @@
 #include <ctype.h>
 #include <zmk/display.h>
 #include <zmk/events/layer_state_changed.h>
+#include <zmk/events/activity_state_changed.h>
+#include <zmk/activity.h>
 #include <zmk/event_manager.h>
 #include <zmk/keymap.h>
 #include <fonts.h>
@@ -25,6 +27,11 @@ static sys_slist_t widgets = SYS_SLIST_STATIC_INIT(&widgets);
 struct layer_prndl_state 
 {
     uint8_t index;
+};
+
+struct layer_prndl_visual_state 
+{
+    enum zmk_activity_state act;
 };
 
 static void layer_prndl_set_sel(lv_obj_t *prndl, struct layer_prndl_state state) 
@@ -63,7 +70,6 @@ static void layer_prndl_set_sel(lv_obj_t *prndl, struct layer_prndl_state state)
     }
 }
 
-
 static void layer_prndl_update_cb(struct layer_prndl_state state) 
 { 
     struct zmk_widget_layer_prndl *widget;
@@ -82,8 +88,40 @@ static struct layer_prndl_state layer_prndl_get_state(const zmk_event_t *eh) {
     };
 }
 
+
+
+static void layer_prndl_toggle_sel(lv_obj_t *meter, struct layer_prndl_visual_state state) 
+{   
+    if(state.act == ZMK_ACTIVITY_IDLE || state.act == ZMK_ACTIVITY_SLEEP)
+    {
+        lv_obj_add_flag(meter, LV_OBJ_FLAG_HIDDEN);
+    }   
+    else if (state.act == ZMK_ACTIVITY_ACTIVE)
+    {
+        lv_obj_clear_flag(meter, LV_OBJ_FLAG_HIDDEN);
+    }
+}
+
+static void layer_prndl_vis_toggle_update_cb(struct layer_prndl_visual_state state) 
+{ 
+    struct zmk_widget_layer_prndl *widget;
+    SYS_SLIST_FOR_EACH_CONTAINER(&widgets, widget, node) 
+    {
+        layer_prndl_toggle_sel(widget->obj, state);
+    }
+}
+
+static struct layer_prndl_visual_state layer_prndl_vis_toggle_get_state(const zmk_event_t *eh) 
+{
+    struct zmk_activity_state_changed *ev = as_zmk_activity_state_changed(eh);
+    return (struct layer_prndl_visual_state){.act = ev->state};
+}
+
 ZMK_DISPLAY_WIDGET_LISTENER(widget_layer_prndl, struct layer_prndl_state, layer_prndl_update_cb, layer_prndl_get_state)
 ZMK_SUBSCRIPTION(widget_layer_prndl, zmk_layer_state_changed);
+
+ZMK_DISPLAY_WIDGET_LISTENER(widget_layer_prndl_vis_toggle, struct layer_prndl_visual_state, layer_prndl_vis_toggle_update_cb, layer_prndl_vis_toggle_get_state)
+ZMK_SUBSCRIPTION(widget_layer_prndl_vis_toggle, zmk_activity_state_changed);
 
 int zmk_widget_layer_prndl_init(struct zmk_widget_layer_prndl *widget, lv_obj_t *parent) 
 {
@@ -99,6 +137,7 @@ int zmk_widget_layer_prndl_init(struct zmk_widget_layer_prndl *widget, lv_obj_t 
     layer_prndl_set_sel(widget->obj, temp);
     sys_slist_append(&widgets, &widget->node);
     widget_layer_prndl_init();
+    widget_layer_prndl_vis_toggle_init();
     return 0;
 }
 
