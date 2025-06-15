@@ -90,13 +90,17 @@ static void wpm_ind_vis_toggle_update_cb(struct wpm_ind_visual_state state)
 static struct wpm_ind_visual_state wpm_ind_vis_toggle_get_state(const zmk_event_t *eh) 
 {
     struct zmk_activity_state_changed *ev = as_zmk_activity_state_changedd(eh);
-    if(ev->state)
+    if(ev->state == ZMK_ACTIVITY_IDLE)
     {
-        LOG_INF("avtivity is true");
+        LOG_INF("avtivity is idle");
     }
-    else
+    else if (ev->state == ZMK_ACTIVITY_SLEEP)
     {
-        LOG_INF("avtivity is false");
+        LOG_INF("avtivity is sleep");
+    }
+    else if (ev->state == ZMK_ACTIVITY_ACTIVE)
+    {
+        LOG_INF("avtivity is active");
     }
     return (struct wpm_ind_visual_state){.act = ev->state};
 }
