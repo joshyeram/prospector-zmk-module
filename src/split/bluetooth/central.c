@@ -861,7 +861,7 @@ static bool split_central_eir_parse(struct bt_data *data, void *user_data) {
     bt_addr_le_t *addr = user_data;
     int i;
 
-    LOG_DBG("[AD]: %u data_len %u", data->type, data->data_len);
+    //LOG_DBG("[AD]: %u data_len %u", data->type, data->data_len);
 
     switch (data->type) {
     case BT_DATA_UUID128_SOME:
@@ -902,7 +902,7 @@ static void split_central_device_found(const bt_addr_le_t *addr, int8_t rssi, ui
     char dev[BT_ADDR_LE_STR_LEN];
 
     bt_addr_le_to_str(addr, dev, sizeof(dev));
-    LOG_DBG("[DEVICE]: %s, AD evt type %u, AD data len %u, RSSI %i", dev, type, ad->len, rssi);
+    //LOG_DBG("[DEVICE]: %s, AD evt type %u, AD data len %u, RSSI %i", dev, type, ad->len, rssi);
 
     /* We're only interested in connectable events */
     if (type == BT_GAP_ADV_TYPE_ADV_IND) {
