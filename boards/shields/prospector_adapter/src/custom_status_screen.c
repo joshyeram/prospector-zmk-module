@@ -30,7 +30,7 @@ lv_obj_t *zmk_display_status_screen()
 
     //zmk_widget_layer_prndl_init(&layer_prndl_widget, screen);
 
-    zmk_widget_wpm_ind_init(&wpm_ind_widget, screen);
+    //zmk_widget_wpm_ind_init(&wpm_ind_widget, screen);
 
     zmk_widget_caps_bar_init(&caps_bar_widget, screen);
 

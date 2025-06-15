@@ -33,12 +33,13 @@ static void caps_bar_set(lv_obj_t *bar, struct caps_bar_state state)
     if (state.ind & LED_CLCK) 
     {
         LOG_INF("clck");
-        //lv_obj_clear_flag(bar, LV_OBJ_FLAG_HIDDEN);
+        lv_obj_clear_flag(bar, LV_OBJ_FLAG_HIDDEN);
         lastActive = true;
     }
     else
     {
         LOG_INF("no clck");
+        lv_obj_clear_flag(bar, LV_OBJ_FLAG_HIDDEN);
         //lv_obj_add_flag(bar, LV_OBJ_FLAG_HIDDEN);
         lastActive = false;
     }
@@ -103,7 +104,7 @@ int zmk_widget_caps_bar_init(struct zmk_widget_caps_bar *widget, lv_obj_t *paren
     lv_obj_set_size(widget->obj, 150, 20);
     lv_bar_set_value(widget->obj, 100, LV_ANIM_OFF);
     lv_obj_align(widget->obj, LV_ALIGN_CENTER, 0, 40);  
-
+    lv_obj_clear_flag(bar, LV_OBJ_FLAG_HIDDEN);
     sys_slist_append(&widgets, &widget->node);
     widget_caps_bar_init();
     //widget_caps_bar_vis_toggle_init();
