@@ -39,8 +39,7 @@ static void caps_bar_set(lv_obj_t *bar, struct caps_bar_state state)
     else
     {
         LOG_INF("no clck");
-        lv_obj_clear_flag(bar, LV_OBJ_FLAG_HIDDEN);
-        //lv_obj_add_flag(bar, LV_OBJ_FLAG_HIDDEN);
+        lv_obj_add_flag(bar, LV_OBJ_FLAG_HIDDEN);
         lastActive = false;
     }
 }
