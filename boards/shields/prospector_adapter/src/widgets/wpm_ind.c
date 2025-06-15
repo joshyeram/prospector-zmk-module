@@ -6,6 +6,7 @@
 #include <zmk/keymap.h>
 #include <zmk/events/wpm_state_changed.h>
 #include <zmk/events/activity_state_changed.h>
+#include <zmk/activity.h>
 #include <zmk/wpm.h>
 #include <fonts.h>
 
