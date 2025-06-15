@@ -44,7 +44,7 @@ static void caps_bar_set(lv_obj_t *bar, struct caps_bar_state state)
 
 static void caps_bar_update_cb(struct caps_bar_state state) 
 { 
-    struct zmk_widget_hid_indicators *widget;
+    struct zmk_widget_caps_bar *widget;
     SYS_SLIST_FOR_EACH_CONTAINER(&widgets, widget, node) 
     {
         caps_bar_set(widget->obj, state);
@@ -72,7 +72,7 @@ static void caps_bar_toggle_sel(lv_obj_t *meter, struct caps_bar_visual_state st
 
 static void caps_bar_vis_toggle_update_cb(struct caps_bar_visual_state state) 
 { 
-    struct zmk_widget_hid_indicators *widget;
+    struct zmk_widget_caps_bar *widget;
     SYS_SLIST_FOR_EACH_CONTAINER(&widgets, widget, node) 
     {
         caps_bar_toggle_sel(widget->obj, state);
