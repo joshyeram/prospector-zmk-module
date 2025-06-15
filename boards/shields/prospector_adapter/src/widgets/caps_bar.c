@@ -32,11 +32,13 @@ static void caps_bar_set(lv_obj_t *bar, struct caps_bar_state state)
 {
     if (state.ind & LED_CLCK) 
     {
+        LOG_INF("clck");
         lv_obj_clear_flag(bar, LV_OBJ_FLAG_HIDDEN);
         lastActive = true;
     }
     else
     {
+        LOG_INF("no clck");
         lv_obj_add_flag(bar, LV_OBJ_FLAG_HIDDEN);
         lastActive = false;
     }
@@ -44,6 +46,7 @@ static void caps_bar_set(lv_obj_t *bar, struct caps_bar_state state)
 
 static void caps_bar_update_cb(struct caps_bar_state state) 
 { 
+    LOG_INF("updating clck");
     struct zmk_widget_caps_bar *widget;
     SYS_SLIST_FOR_EACH_CONTAINER(&widgets, widget, node) 
     {
