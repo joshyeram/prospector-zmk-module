@@ -1,5 +1,6 @@
 {
     "files.associations": {
-        "kconfig": "cpp"
+        "kconfig": "cpp",
+        "caps_bar.h": "c"
     }
 }

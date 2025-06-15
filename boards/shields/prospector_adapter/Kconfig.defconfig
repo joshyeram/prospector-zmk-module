@@ -63,4 +63,7 @@ config PWM
 config LED
     default y
 
+CONFIG_ZMK_HID_INDICATORS
+    default y
+
 endif
