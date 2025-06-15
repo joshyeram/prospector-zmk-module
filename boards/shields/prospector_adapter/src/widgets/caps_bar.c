@@ -33,13 +33,13 @@ static void caps_bar_set(lv_obj_t *bar, struct caps_bar_state state)
     if (state.ind & LED_CLCK) 
     {
         LOG_INF("clck");
-        //lv_obj_clear_flag(bar, LV_OBJ_FLAG_HIDDEN);
+        lv_obj_clear_flag(bar, LV_OBJ_FLAG_HIDDEN);
         lastActive = true;
     }
     else
     {
         LOG_INF("no clck");
-        //lv_obj_add_flag(bar, LV_OBJ_FLAG_HIDDEN);
+        lv_obj_add_flag(bar, LV_OBJ_FLAG_HIDDEN);
         lastActive = false;
     }
 }
@@ -65,11 +65,13 @@ static void caps_bar_toggle_sel(lv_obj_t *meter, struct caps_bar_visual_state st
 {   
     if(state.act == ZMK_ACTIVITY_IDLE || state.act == ZMK_ACTIVITY_SLEEP)
     {
-        //lv_obj_add_flag(meter, LV_OBJ_FLAG_HIDDEN);
+        LOG_INF("hide from inact");
+        lv_obj_add_flag(meter, LV_OBJ_FLAG_HIDDEN);
     }   
     else if (state.act == ZMK_ACTIVITY_ACTIVE && lastActive)
     {
-        //lv_obj_clear_flag(meter, LV_OBJ_FLAG_HIDDEN);
+        LOG_INF("unhide from inact");
+        lv_obj_clear_flag(meter, LV_OBJ_FLAG_HIDDEN);
     }
 }
 
@@ -97,8 +99,7 @@ ZMK_SUBSCRIPTION(widget_caps_bar_vis_toggle, zmk_activity_state_changed);
 int zmk_widget_caps_bar_init(struct zmk_widget_caps_bar *widget, lv_obj_t *parent)
 {
     widget->obj = lv_bar_create(parent);
-    //lv_obj_add_flag(widget->obj, LV_OBJ_FLAG_HIDDEN);
-    lv_obj_clear_flag(widget->obj, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(widget->obj, LV_OBJ_FLAG_HIDDEN);
     lv_obj_set_size(widget->obj, 150, 20);
     lv_bar_set_value(widget->obj, 100, LV_ANIM_OFF);
     lv_obj_align(widget->obj, LV_ALIGN_CENTER, 0, 40);  
