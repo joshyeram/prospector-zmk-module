@@ -80,7 +80,7 @@ static void wpm_ind_toggle_sel(lv_obj_t *meter, struct wpm_ind_visual_state stat
 
 static void wpm_ind_vis_toggle_update_cb(struct wpm_ind_visual_state state) 
 { 
-    struct zmk_activity_state_changed *widget;
+    struct zmk_widget_wpm_ind *widget;
     SYS_SLIST_FOR_EACH_CONTAINER(&widgets, widget, node) 
     {
         wpm_ind_toggle_sel(widget->obj, state);
