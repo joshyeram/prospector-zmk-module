@@ -23,7 +23,7 @@ struct wpm_ind_state
 
 struct wpm_ind_visual_state 
 {
-    bool hidden;
+    zmk_activity_state act;
 };
 
 static void wpm_ind_set(lv_obj_t *meter, struct wpm_ind_state state) 
@@ -65,12 +65,12 @@ static struct wpm_ind_state wpm_ind_get_state(const zmk_event_t *eh)
 
 static void wpm_ind_toggle_sel(lv_obj_t *meter, struct wpm_ind_visual_state state) 
 {   
-    if(state.hidden)
+    if(state.act == ZMK_ACTIVITY_IDLE || state.act == ZMK_ACTIVITY_SLEEP)
     {
         LOG_INF("should be hidden");
         lv_obj_add_flag(meter, LV_OBJ_FLAG_HIDDEN);
     }   
-    else
+    else if (state.act == ZMK_ACTIVITY_ACTIVE)
     {
         LOG_INF("should be un-hidden");
         lv_obj_clear_flag(meter, LV_OBJ_FLAG_HIDDEN);
@@ -79,7 +79,7 @@ static void wpm_ind_toggle_sel(lv_obj_t *meter, struct wpm_ind_visual_state stat
 
 static void wpm_ind_vis_toggle_update_cb(struct wpm_ind_visual_state state) 
 { 
-    struct zmk_widget_wpm_ind *widget;
+    struct zmk_activity_state_changed *widget;
     SYS_SLIST_FOR_EACH_CONTAINER(&widgets, widget, node) 
     {
         wpm_ind_toggle_sel(widget->obj, state);
@@ -89,7 +89,7 @@ static void wpm_ind_vis_toggle_update_cb(struct wpm_ind_visual_state state)
 
 static struct wpm_ind_visual_state wpm_ind_vis_toggle_get_state(const zmk_event_t *eh) 
 {
-    struct zmk_wpm_state_changed *ev = as_zmk_wpm_state_changed(eh);
+    struct zmk_activity_state_changed *ev = as_zmk_activity_state_changedd(eh);
     if(ev->state)
     {
         LOG_INF("avtivity is true");
@@ -98,7 +98,7 @@ static struct wpm_ind_visual_state wpm_ind_vis_toggle_get_state(const zmk_event_
     {
         LOG_INF("avtivity is false");
     }
-    return (struct wpm_ind_visual_state){.hidden = ev->state};
+    return (struct wpm_ind_visual_state){.act = ev->state};
 }
 
 //                           id?                       struct with only wpm,        some contaner,                   after getting wpm state change, return a struct with wpm copy                
