@@ -85,10 +85,10 @@ static struct caps_bar_state caps_bar_get_state(const zmk_event_t *eh)
 // }
 
 // static struct caps_bar_visual_state caps_bar_vis_toggle_get_state(const zmk_event_t *eh) 
-{
-    struct zmk_activity_state_changed *ev = as_zmk_activity_state_changed(eh);
-    return (struct caps_bar_visual_state){.act = ev->state};
-}
+// {
+//     struct zmk_activity_state_changed *ev = as_zmk_activity_state_changed(eh);
+//     return (struct caps_bar_visual_state){.act = ev->state};
+// }
             
 ZMK_DISPLAY_WIDGET_LISTENER(widget_caps_bar,            struct caps_bar_state,        caps_bar_update_cb,               caps_bar_get_state)
 ZMK_SUBSCRIPTION(widget_caps_bar,            zmk_hid_indicators_changed);
