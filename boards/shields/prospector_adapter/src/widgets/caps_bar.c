@@ -6,6 +6,7 @@
 #include <zmk/keymap.h>
 #include <zmk/events/activity_state_changed.h>
 #include <zmk/events/hid_indicators_changed.h>
+#include <zmk/hid_indicators_types.h>
 #include <zmk/activity.h>
 #include <zephyr/kernel.h>
 #include <zephyr/logging/log.h>
