@@ -82,7 +82,7 @@ static void caps_bar_vis_toggle_update_cb(struct caps_bar_visual_state state)
 static struct caps_bar_visual_state caps_bar_vis_toggle_get_state(const zmk_event_t *eh) 
 {
     struct zmk_activity_state_changed *ev = as_zmk_activity_state_changed(eh);
-    return (struct wcaps_bar_visual_state){.act = ev->state};
+    return (struct caps_bar_visual_state){.act = ev->state};
 }
             
 ZMK_DISPLAY_WIDGET_LISTENER(widget_caps_bar,            struct caps_bar_state,        caps_bar_update_cb,               caps_bar_get_state)
