@@ -64,7 +64,7 @@ static struct wpm_ind_state wpm_ind_get_state(const zmk_event_t *eh)
 
 
 static void wpm_ind_toggle_sel(lv_obj_t *meter, struct wpm_ind_visual_state state) 
-{   
+{   k
     if(state.hidden)
     {
         LOG_INF("should be hidden");
@@ -137,6 +137,7 @@ int zmk_widget_wpm_ind_init(struct zmk_widget_wpm_ind *widget, lv_obj_t *parent)
     lv_meter_set_indicator_end_value(widget->obj, indic, 150);
 
     indic = lv_meter_add_needle_line(widget->obj, scale, 4, lv_palette_main(LV_PALETTE_GREY), -15);
+    lv_obj_clear_flag(widget->obj, LV_OBJ_FLAG_HIDDEN);
 
     sys_slist_append(&widgets, &widget->node);
     widget_wpm_ind_init();
