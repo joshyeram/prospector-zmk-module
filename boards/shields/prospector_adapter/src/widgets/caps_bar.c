@@ -23,10 +23,10 @@ struct caps_bar_state
     zmk_hid_indicators_t ind;
 };
 
-struct caps_bar_visual_state 
-{
-    enum zmk_activity_state act;
-};
+// struct caps_bar_visual_state 
+// {
+//     enum zmk_activity_state act;
+// };
 
 static void caps_bar_set(lv_obj_t *bar, struct caps_bar_state state) 
 {
@@ -61,30 +61,30 @@ static struct caps_bar_state caps_bar_get_state(const zmk_event_t *eh)
 }
 
 
-static void caps_bar_toggle_sel(lv_obj_t *meter, struct caps_bar_visual_state state) 
-{   
-    if(state.act == ZMK_ACTIVITY_IDLE || state.act == ZMK_ACTIVITY_SLEEP)
-    {
-        LOG_INF("hide from inact");
-        lv_obj_add_flag(meter, LV_OBJ_FLAG_HIDDEN);
-    }   
-    else if (state.act == ZMK_ACTIVITY_ACTIVE && lastActive)
-    {
-        LOG_INF("unhide from inact");
-        lv_obj_clear_flag(meter, LV_OBJ_FLAG_HIDDEN);
-    }
-}
+// static void caps_bar_toggle_sel(lv_obj_t *meter, struct caps_bar_visual_state state) 
+// {   
+//     if(state.act == ZMK_ACTIVITY_IDLE || state.act == ZMK_ACTIVITY_SLEEP)
+//     {
+//         LOG_INF("hide from inact");
+//         lv_obj_add_flag(meter, LV_OBJ_FLAG_HIDDEN);
+//     }   
+//     else if (state.act == ZMK_ACTIVITY_ACTIVE && lastActive)
+//     {
+//         LOG_INF("unhide from inact");
+//         lv_obj_clear_flag(meter, LV_OBJ_FLAG_HIDDEN);
+//     }
+// }
 
-static void caps_bar_vis_toggle_update_cb(struct caps_bar_visual_state state) 
-{ 
-    struct zmk_widget_caps_bar *widget;
-    SYS_SLIST_FOR_EACH_CONTAINER(&widgets, widget, node) 
-    {
-        caps_bar_toggle_sel(widget->obj, state);
-    }
-}
+// static void caps_bar_vis_toggle_update_cb(struct caps_bar_visual_state state) 
+// { 
+//     struct zmk_widget_caps_bar *widget;
+//     SYS_SLIST_FOR_EACH_CONTAINER(&widgets, widget, node) 
+//     {
+//         caps_bar_toggle_sel(widget->obj, state);
+//     }
+// }
 
-static struct caps_bar_visual_state caps_bar_vis_toggle_get_state(const zmk_event_t *eh) 
+// static struct caps_bar_visual_state caps_bar_vis_toggle_get_state(const zmk_event_t *eh) 
 {
     struct zmk_activity_state_changed *ev = as_zmk_activity_state_changed(eh);
     return (struct caps_bar_visual_state){.act = ev->state};
@@ -93,8 +93,8 @@ static struct caps_bar_visual_state caps_bar_vis_toggle_get_state(const zmk_even
 ZMK_DISPLAY_WIDGET_LISTENER(widget_caps_bar,            struct caps_bar_state,        caps_bar_update_cb,               caps_bar_get_state)
 ZMK_SUBSCRIPTION(widget_caps_bar,            zmk_hid_indicators_changed);
 
-ZMK_DISPLAY_WIDGET_LISTENER(widget_caps_bar_vis_toggle, struct caps_bar_visual_state, caps_bar_vis_toggle_update_cb,    caps_bar_vis_toggle_get_state)
-ZMK_SUBSCRIPTION(widget_caps_bar_vis_toggle, zmk_activity_state_changed);
+// ZMK_DISPLAY_WIDGET_LISTENER(widget_caps_bar_vis_toggle, struct caps_bar_visual_state, caps_bar_vis_toggle_update_cb,    caps_bar_vis_toggle_get_state)
+// ZMK_SUBSCRIPTION(widget_caps_bar_vis_toggle, zmk_activity_state_changed);
 
 int zmk_widget_caps_bar_init(struct zmk_widget_caps_bar *widget, lv_obj_t *parent)
 {
@@ -106,7 +106,7 @@ int zmk_widget_caps_bar_init(struct zmk_widget_caps_bar *widget, lv_obj_t *paren
 
     sys_slist_append(&widgets, &widget->node);
     widget_caps_bar_init();
-    widget_caps_bar_vis_toggle_init();
+    //widget_caps_bar_vis_toggle_init();
     return 0;
 }
 
