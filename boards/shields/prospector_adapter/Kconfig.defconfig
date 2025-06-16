@@ -14,11 +14,11 @@ config ZMK_DISPLAY_STATUS_SCREEN_CUSTOM
     select LV_USE_LABEL
     select LV_USE_BAR
     select LV_USE_FLEX
-    select LV_USE_ROLLER
     select LV_COLOR_SCREEN_TRANSP
     select LV_FONT_UNSCII_16
     select LV_FONT_MONTSERRAT_20
     select LV_USE_METER 
+    select LV_USE_IMG
 
 choice ZMK_DISPLAY_WORK_QUEUE
     default ZMK_DISPLAY_WORK_QUEUE_DEDICATED
