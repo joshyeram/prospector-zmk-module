@@ -8,4 +8,5 @@ struct zmk_widget_senna {
     lv_obj_t *obj;
 };
 
-int zmk_widget_senna_init(lv_obj_t *parent);
+int zmk_widget_senna_init(struct zmk_widget_senna *widget, lv_obj_t *parent);
+lv_obj_t *zmk_widget_senna_obj(struct zmk_widget_senna *widget);

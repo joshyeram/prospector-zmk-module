@@ -7,69 +7,25 @@
 #include <zmk/activity.h>
 #include <zmk/events/activity_state_changed.h>
 #include <zephyr/logging/log.h>
-
-#define FRAME_COUNT 15
-#define VIDEO_FPS   6
-
 LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 
 static sys_slist_t widgets = SYS_SLIST_STATIC_INIT(&widgets);
-static lv_obj_t *video_img;
-static lv_timer_t *video_timer;
-static lv_obj_t *screen;
-static uint8_t frame_idx;
-
-// struct uint8_t_state 
-// {    
-//     uint8_t ind;
-// };
-
 struct senna_visual_state 
 {
     enum zmk_activity_state act;
 };
 
-static void next_frame_cb(lv_timer_t *t)
-{
-    char path[64];
-    snprintf(path, sizeof(path), "senna_pic/frame_%03d.bin", frame_idx);  // Adjust FS prefix!
-    lv_img_set_src(video_img, path);
-    frame_idx = (frame_idx + 1) % FRAME_COUNT;
-}
-
-void video_start(void)
-{
-    if (video_timer) return;
-
-    video_img = lv_img_create(screen);
-    lv_obj_center(video_img);
-    lv_obj_clear_flag(video_img, LV_OBJ_FLAG_HIDDEN);
-
-    frame_idx = 0;
-    lv_img_set_src(video_img, "senna_pic/frame_001.bin");
-
-    video_timer = lv_timer_create(next_frame_cb, 1000 / VIDEO_FPS, NULL);
-}
-
-void video_stop_and_hide(void)
-{
-    if (!video_timer) return;
-    lv_timer_del(video_timer);
-    video_timer = NULL;
-    lv_obj_add_flag(video_img, LV_OBJ_FLAG_HIDDEN);
-}
-
-static void senna_toggle_sel(lv_obj_t *meter, struct senna_visual_state state) 
+static void senna_toggle_sel(lv_obj_t *image, struct senna_visual_state state) 
 {   
     if(state.act == ZMK_ACTIVITY_IDLE || state.act == ZMK_ACTIVITY_SLEEP)
     {
-        LOG_INF("senna from inact");
-        video_start(void);
+        LOG_INF("unhide from inact");
+        lv_obj_clear_flag(image, LV_OBJ_FLAG_HIDDEN);
     }   
     else if (state.act == ZMK_ACTIVITY_ACTIVE && lastActive)
     {
-        LOG_INF("no senna from act");
-        video_stop_and_hide();
+        LOG_INF("hide from act");
+        lv_obj_add_flag(image, LV_OBJ_FLAG_HIDDEN);
     }
 }
 
@@ -91,11 +47,16 @@ static struct senna_visual_state senna_vis_toggle_get_state(const zmk_event_t *e
 ZMK_DISPLAY_WIDGET_LISTENER(widget_senna_vis_toggle, struct senna_visual_state, senna_vis_toggle_update_cb,    senna_vis_toggle_get_state)
 ZMK_SUBSCRIPTION(widget_senna_vis_toggle, zmk_activity_state_changed);
 
-int zmk_widget_senna_init(lv_obj_t *parent)
+int zmk_widget_senna_init(struct zmk_widget_senna *widget, lv_obj_t *parent)
 {
-    screen = parent;
+    widget->obj = lv_img_create(parent);
+    lv_obj_center(widget->obj);
+    lv_img_set_src(widget->obj, "senna_pic/frame_001.bin");
+    
+    lv_obj_clear_flag(widget->obj, LV_OBJ_FLAG_HIDDEN);
     sys_slist_append(&widgets, &widget->node);
-    widget_senna_init();
     widget_senna_vis_toggle_init();
     return 0;
 }
+
+lv_obj_t *zmk_widget_senna_obj(struct zmk_widget_senna *widget) {return widget->obj;}
