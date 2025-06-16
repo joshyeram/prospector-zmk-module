@@ -41,7 +41,7 @@ void video_start(void)
 {
     if (video_timer) return;
 
-    video_img = lv_img_create(lv_scr_act());
+    video_img = lv_img_create(screen);
     lv_obj_center(video_img);
     lv_obj_clear_flag(video_img, LV_OBJ_FLAG_HIDDEN);
 
