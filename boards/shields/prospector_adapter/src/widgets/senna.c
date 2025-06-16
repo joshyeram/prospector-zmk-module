@@ -51,7 +51,8 @@ int zmk_widget_senna_init(struct zmk_widget_senna *widget, lv_obj_t *parent)
 {
     widget->obj = lv_img_create(parent);
     lv_obj_center(widget->obj);
-    lv_img_set_src(widget->obj, "senna_pic/frame_001.bin");
+    //lv_img_set_src(widget->obj, "senna_pic/frame_001.bin");
+    lv_img_set_src(widget->obj, LV_SYMBOL_OK);
     
     //lv_obj_clear_flag(widget->obj, LV_OBJ_FLAG_HIDDEN);
     sys_slist_append(&widgets, &widget->node);
