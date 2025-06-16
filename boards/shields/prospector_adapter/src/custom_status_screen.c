@@ -32,15 +32,15 @@ lv_obj_t *zmk_display_status_screen()
 
     zmk_widget_layer_prndl_init(&layer_prndl_widget, screen);
 
-    zmk_widget_wpm_ind_init(&wpm_ind_widget, screen);
+    // zmk_widget_wpm_ind_init(&wpm_ind_widget, screen);
 
-    zmk_widget_caps_bar_init(&caps_bar_widget, screen);
+    // zmk_widget_caps_bar_init(&caps_bar_widget, screen);
 
     zmk_widget_senna_init(&senna_widget, screen);
 
-    zmk_widget_battery_bar_init(&battery_bar_widget, screen);
-    lv_obj_set_size(zmk_widget_battery_bar_obj(&battery_bar_widget), lv_pct(100), 48);
-    lv_obj_align(zmk_widget_battery_bar_obj(&battery_bar_widget), LV_ALIGN_BOTTOM_MID, 0, 0);
+    // zmk_widget_battery_bar_init(&battery_bar_widget, screen);
+    // lv_obj_set_size(zmk_widget_battery_bar_obj(&battery_bar_widget), lv_pct(100), 48);
+    // lv_obj_align(zmk_widget_battery_bar_obj(&battery_bar_widget), LV_ALIGN_BOTTOM_MID, 0, 0);
 
     return screen;
 }

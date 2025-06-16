@@ -19,12 +19,12 @@ static void senna_toggle_sel(lv_obj_t *image, struct senna_visual_state state)
 {   
     if(state.act == ZMK_ACTIVITY_IDLE || state.act == ZMK_ACTIVITY_SLEEP)
     {
-        LOG_INF("unhide from inact");
+        LOG_INF("senna unhide from inact");
         lv_obj_clear_flag(image, LV_OBJ_FLAG_HIDDEN);
     }   
     else if (state.act == ZMK_ACTIVITY_ACTIVE)
     {
-        LOG_INF("hide from act");
+        LOG_INF("senna hide from act");
         lv_obj_add_flag(image, LV_OBJ_FLAG_HIDDEN);
     }
 }
@@ -53,7 +53,7 @@ int zmk_widget_senna_init(struct zmk_widget_senna *widget, lv_obj_t *parent)
     lv_obj_center(widget->obj);
     lv_img_set_src(widget->obj, "senna_pic/frame_001.bin");
     
-    lv_obj_clear_flag(widget->obj, LV_OBJ_FLAG_HIDDEN);
+    //lv_obj_clear_flag(widget->obj, LV_OBJ_FLAG_HIDDEN);
     sys_slist_append(&widgets, &widget->node);
     widget_senna_vis_toggle_init();
     return 0;
