@@ -21,6 +21,7 @@ static struct zmk_widget_layer_prndl layer_prndl_widget;
 static struct zmk_widget_battery_bar battery_bar_widget;
 static struct zmk_widget_wpm_ind     wpm_ind_widget;
 static struct zmk_widget_caps_bar    caps_bar_widget;
+static struct zmk_widget_senna       senna_widget;
 
 lv_obj_t *zmk_display_status_screen() 
 {
@@ -35,7 +36,7 @@ lv_obj_t *zmk_display_status_screen()
 
     zmk_widget_caps_bar_init(&caps_bar_widget, screen);
 
-    zmk_widget_senna_init(screen);
+    zmk_widget_senna_init(&senna_widget, screen);
 
     zmk_widget_battery_bar_init(&battery_bar_widget, screen);
     lv_obj_set_size(zmk_widget_battery_bar_obj(&battery_bar_widget), lv_pct(100), 48);
