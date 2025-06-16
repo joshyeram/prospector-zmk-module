@@ -13,6 +13,7 @@ LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 
 static sys_slist_t widgets = SYS_SLIST_STATIC_INIT(&widgets);
 static bool lastActive = false;
+static bool sleep      = false;
 
 #define LED_NLCK 0x01
 #define LED_CLCK 0x02
@@ -30,7 +31,7 @@ struct caps_bar_visual_state
 
 static void caps_bar_set(lv_obj_t *bar, struct caps_bar_state state) 
 {
-    if (state.ind & LED_CLCK) 
+    if ((state.ind & LED_CLCK) && !sleep) 
     {
         LOG_INF("clck");
         lv_obj_clear_flag(bar, LV_OBJ_FLAG_HIDDEN);
@@ -65,11 +66,13 @@ static void caps_bar_toggle_sel(lv_obj_t *meter, struct caps_bar_visual_state st
 {   
     if(state.act == ZMK_ACTIVITY_IDLE || state.act == ZMK_ACTIVITY_SLEEP)
     {
+        sleep = true;
         LOG_INF("hide from inact");
         lv_obj_add_flag(meter, LV_OBJ_FLAG_HIDDEN);
     }   
     else if (state.act == ZMK_ACTIVITY_ACTIVE && lastActive)
     {
+        sleep = false;
         LOG_INF("unhide from inact");
         lv_obj_clear_flag(meter, LV_OBJ_FLAG_HIDDEN);
     }

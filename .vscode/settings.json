@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "kconfig": "cpp",
-        "caps_bar.h": "c"
+        "caps_bar.h": "c",
+        "senna.h": "c"
     }
 }
