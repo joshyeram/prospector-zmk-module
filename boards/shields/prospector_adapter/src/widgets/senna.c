@@ -22,7 +22,7 @@ static void senna_toggle_sel(lv_obj_t *image, struct senna_visual_state state)
         LOG_INF("unhide from inact");
         lv_obj_clear_flag(image, LV_OBJ_FLAG_HIDDEN);
     }   
-    else if (state.act == ZMK_ACTIVITY_ACTIVE && lastActive)
+    else if (state.act == ZMK_ACTIVITY_ACTIVE)
     {
         LOG_INF("hide from act");
         lv_obj_add_flag(image, LV_OBJ_FLAG_HIDDEN);
