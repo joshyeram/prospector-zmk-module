@@ -63,13 +63,11 @@ static void senna_toggle_sel(lv_obj_t *meter, struct senna_visual_state state)
 {   
     if(state.act == ZMK_ACTIVITY_IDLE || state.act == ZMK_ACTIVITY_SLEEP)
     {
-        sleep = true;
         LOG_INF("senna from inact");
         video_start(void);
     }   
     else if (state.act == ZMK_ACTIVITY_ACTIVE && lastActive)
     {
-        sleep = false;
         LOG_INF("no senna from act");
         video_stop_and_hide();
     }
