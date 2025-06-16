@@ -7,6 +7,7 @@
 #include "widgets/battery_bar.h"
 #include "widgets/wpm_ind.h"
 #include "widgets/caps_bar.h"
+#include "widgets/senna.h"
 
 #include <fonts.h>
 #include <sf_symbols.h>
