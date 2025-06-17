@@ -68,13 +68,13 @@ static void wpm_ind_toggle_sel(lv_obj_t *meter, struct wpm_ind_visual_state stat
     if(state.act == ZMK_ACTIVITY_IDLE || state.act == ZMK_ACTIVITY_PAST_IDLE)
     {
         LOG_INF("should be hidden");
-        lv_obj_fade_out(meter, 1000, 0);
+        //lv_obj_fade_out(meter, 1000, 0);
         lv_obj_add_flag(meter, LV_OBJ_FLAG_HIDDEN);
     }   
     else if (state.act == ZMK_ACTIVITY_ACTIVE)
     {
         LOG_INF("should be un-hidden");
-        lv_obj_fade_in(meter, 1000, 0);
+        //lv_obj_fade_in(meter, 1000, 0);
         lv_obj_clear_flag(meter, LV_OBJ_FLAG_HIDDEN);
     }
 }
