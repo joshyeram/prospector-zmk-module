@@ -18,14 +18,19 @@ struct senna_visual_state
 
 static void senna_toggle_sel(lv_obj_t *image, struct senna_visual_state state) 
 {   
-    if(state.act == ZMK_ACTIVITY_IDLE || state.act == ZMK_ACTIVITY_SLEEP)
+    if(state.act == ZMK_ACTIVITY_IDLE)
     {
-        LOG_INF("senna unhide from inact");
+        LOG_INF("senna unhide idle");
         lv_obj_clear_flag(image, LV_OBJ_FLAG_HIDDEN);
+    }
+    else if (state.act == ZMK_ACTIVITY_SLEEP)
+    {
+        LOG_INF("senna hide sleep");
+        lv_obj_add_flag(image, LV_OBJ_FLAG_HIDDEN);
     }   
     else if (state.act == ZMK_ACTIVITY_ACTIVE)
     {
-        LOG_INF("senna hide from act");
+        LOG_INF("senna hide act");
         lv_obj_add_flag(image, LV_OBJ_FLAG_HIDDEN);
     }
 }

@@ -5,6 +5,8 @@
 #include <zmk/ble.h>
 #include <zmk/events/battery_state_changed.h>
 #include <zmk/events/split_central_status_changed.h>
+#include <zmk/activity.h>
+#include <zmk/events/activity_state_changed.h>
 #include <zmk/event_manager.h>
 
 #include <fonts.h>
@@ -25,6 +27,11 @@ struct battery_state {
     bool peripheral_connected;
     uint8_t source;
     uint8_t level;
+};
+
+struct battery_visual_state 
+{
+    enum zmk_activity_state act;
 };
 
 static void set_battery_bar_value(lv_obj_t *widget, struct battery_state state) {
@@ -109,10 +116,41 @@ static struct battery_state battery_bar_get_state(const zmk_event_t *eh) {
     }
 }
 
-ZMK_DISPLAY_WIDGET_LISTENER(widget_battery_bar, struct battery_state, battery_bar_update_cb,
-                            battery_bar_get_state);
+static void battery_toggle_sel(lv_obj_t *image, struct battery_visual_state state) 
+{   
+    if(state.act == ZMK_ACTIVITY_IDLE || state.act == ZMK_ACTIVITY_ACTIVE)
+    {
+        LOG_INF("battery unhide idle/active" );
+        lv_obj_clear_flag(image, LV_OBJ_FLAG_HIDDEN);
+    }
+    else if (state.act == ZMK_ACTIVITY_SLEEP)
+    {
+        LOG_INF("battery hide sleep");
+        lv_obj_add_flag(image, LV_OBJ_FLAG_HIDDEN);
+    }   
+}
+
+static void battery_vis_toggle_update_cb(struct battery_visual_state state) 
+{ 
+    struct zmk_widget_battery_bar *widget;
+    SYS_SLIST_FOR_EACH_CONTAINER(&widgets, widget, node) 
+    {
+        battery_toggle_sel(widget->obj, state);
+    }
+}
+
+static struct battery_visual_state battery_vis_toggle_get_state(const zmk_event_t *eh) 
+{
+    struct zmk_activity_state_changed *ev = as_zmk_activity_state_changed(eh);
+    return (struct battery_visual_state){.act = ev->state};
+}
+
+ZMK_DISPLAY_WIDGET_LISTENER(widget_battery_bar, struct battery_state, battery_bar_update_cb, battery_bar_get_state);
 ZMK_SUBSCRIPTION(widget_battery_bar, zmk_peripheral_battery_state_changed);
 ZMK_SUBSCRIPTION(widget_battery_bar, zmk_split_central_status_changed);
+
+ZMK_DISPLAY_WIDGET_LISTENER(widget_battery_vis_toggle, struct battery_visual_state, battery_vis_toggle_update_cb,    battery_vis_toggle_get_state)
+ZMK_SUBSCRIPTION(widget_battery_vis_toggle, zmk_activity_state_changed);
 
 int zmk_widget_battery_bar_init(struct zmk_widget_battery_bar *widget, lv_obj_t *parent) {
     widget->obj = lv_obj_create(parent);
