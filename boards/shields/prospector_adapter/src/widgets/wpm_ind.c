@@ -64,15 +64,30 @@ static struct wpm_ind_state wpm_ind_get_state(const zmk_event_t *eh)
 }
 
 
+static void wpm_ind_opa_set(lv_obj_t *meter, int opa) 
+{
+    lv_obj_set_style_opa(meter, opa, 0);
+}
+
 static void wpm_ind_toggle_sel(lv_obj_t *meter, struct wpm_ind_visual_state state) 
 {   
+    lv_anim_t a;
+    lv_anim_init(&a);
+    lv_anim_set_exec_cb(&a, wpm_ind_set);
+    lv_anim_set_var(&a, meter);
     if(state.act == ZMK_ACTIVITY_IDLE || state.act == ZMK_ACTIVITY_PAST_IDLE)
     {
+        lv_anim_set_values(&a, 255, 0);
+        lv_anim_set_time(&a, 1000);
+        lv_anim_start(&a);
         LOG_INF("should be hidden");
         lv_obj_add_flag(meter, LV_OBJ_FLAG_HIDDEN);
     }   
     else if (state.act == ZMK_ACTIVITY_ACTIVE)
     {
+        lv_anim_set_values(&a, 0, 255);
+        lv_anim_set_time(&a, 1000);
+        lv_anim_start(&a);
         LOG_INF("should be un-hidden");
         lv_obj_clear_flag(meter, LV_OBJ_FLAG_HIDDEN);
     }
