@@ -10,7 +10,7 @@
 LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 
 static sys_slist_t widgets = SYS_SLIST_STATIC_INIT(&widgets);
-LV_IMG_DECLARE(frame_001);
+LV_IMG_DECLARE(frame_6070);
 struct senna_visual_state 
 {
     enum zmk_activity_state act;
@@ -52,8 +52,8 @@ int zmk_widget_senna_init(struct zmk_widget_senna *widget, lv_obj_t *parent)
 {
     widget->obj = lv_img_create(parent);
     lv_obj_center(widget->obj);
-    lv_img_set_src(widget->obj, "senna_pic/frame_001TC565bins.bin");
-    //lv_img_set_src(widget->obj, &frame_001);
+    //lv_img_set_src(widget->obj, "senna_pic/frame_001TC565bins.bin");
+    lv_img_set_src(widget->obj, &frame_6070);
     
     //lv_obj_clear_flag(widget->obj, LV_OBJ_FLAG_HIDDEN);
     sys_slist_append(&widgets, &widget->node);
