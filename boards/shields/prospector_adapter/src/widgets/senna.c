@@ -23,7 +23,7 @@ static void senna_toggle_sel(lv_obj_t *image, struct senna_visual_state state)
         LOG_INF("senna unhide idle");
         lv_obj_clear_flag(image, LV_OBJ_FLAG_HIDDEN);
     }
-    else if (state.act == ZMK_ACTIVITY_SLEEP)
+    else if (state.act == ZMK_ACTIVITY_PAST_IDLE)
     {
         LOG_INF("senna hide sleep");
         lv_obj_add_flag(image, LV_OBJ_FLAG_HIDDEN);
