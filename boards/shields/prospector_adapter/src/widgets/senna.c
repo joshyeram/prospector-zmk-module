@@ -6,7 +6,7 @@
 #include <zmk/event_manager.h>
 #include <zmk/activity.h>
 #include <zmk/events/activity_state_changed.h>
-#include <zephyr/logging/log.h>
+#include <zephyr/logging/log.h>a
 LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 
 static sys_slist_t widgets = SYS_SLIST_STATIC_INIT(&widgets);
