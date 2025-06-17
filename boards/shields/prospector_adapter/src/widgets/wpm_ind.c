@@ -73,7 +73,7 @@ static void wpm_ind_toggle_sel(lv_obj_t *meter, struct wpm_ind_visual_state stat
 {   
     lv_anim_t a;
     lv_anim_init(&a);
-    lv_anim_set_exec_cb(&a, wpm_ind_set);
+    lv_anim_set_exec_cb(&a, wpm_ind_opa_set);
     lv_anim_set_var(&a, meter);
     if(state.act == ZMK_ACTIVITY_IDLE || state.act == ZMK_ACTIVITY_PAST_IDLE)
     {
