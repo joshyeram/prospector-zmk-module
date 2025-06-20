@@ -102,7 +102,7 @@ int zmk_widget_caps_bar_init(struct zmk_widget_caps_bar *widget, lv_obj_t *paren
     lv_obj_align(widget->obj, LV_ALIGN_CENTER, 0, 30);    
     lv_label_set_text(widget->obj, "#1E90FF CAPS#");
     
-    lv_obj_add_flag(bar, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(widget->obj, LV_OBJ_FLAG_HIDDEN);
     sys_slist_append(&widgets, &widget->node);
     widget_caps_bar_init();
     widget_caps_bar_vis_toggle_init();
