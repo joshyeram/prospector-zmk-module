@@ -6,8 +6,16 @@
 #include <zmk/event_manager.h>
 #include <zmk/activity.h>
 #include <zmk/events/activity_state_changed.h>
-#include <zephyr/logging/log.h>a
+#include <zephyr/logging/log.h>
+
+#include <zephyr/drivers/pwm.h>
+#include <zephyr/drivers/led.h>
+#include <zephyr/device.h>
+
 LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
+
+static const struct device *pwm_leds_dev = DEVICE_DT_GET_ONE(pwm_leds);
+#define DISP_BL DT_NODE_CHILD_IDX(DT_NODELABEL(disp_bl))
 
 static sys_slist_t widgets = SYS_SLIST_STATIC_INIT(&widgets);
 LV_IMG_DECLARE(frame_001);
@@ -20,16 +28,20 @@ static void senna_toggle_sel(lv_obj_t *image, struct senna_visual_state state)
 {   
     if(state.act == ZMK_ACTIVITY_IDLE)
     {
+        led_set_brightness(pwm_leds_dev, DISP_BL, 150)
         LOG_INF("senna unhide idle");
         lv_obj_clear_flag(image, LV_OBJ_FLAG_HIDDEN);
     }
     else if (state.act == ZMK_ACTIVITY_PAST_IDLE)
     {
+        led_set_brightness(pwm_leds_dev, DISP_BL, 50)
         LOG_INF("senna hide sleep");
-        lv_obj_add_flag(image, LV_OBJ_FLAG_HIDDEN);
+        //lv_obj_add_flag(image, LV_OBJ_FLAG_HIDDEN);
+        lv_obj_clear_flag(image, LV_OBJ_FLAG_HIDDEN);
     }   
     else if (state.act == ZMK_ACTIVITY_ACTIVE)
     {
+        led_set_brightness(pwm_leds_dev, DISP_BL, 200)
         LOG_INF("senna hide act");
         lv_obj_add_flag(image, LV_OBJ_FLAG_HIDDEN);
     }
