@@ -65,7 +65,7 @@ static struct wpm_ind_state wpm_ind_get_state(const zmk_event_t *eh)
 
 static void wpm_ind_toggle_sel(lv_obj_t *meter, struct wpm_ind_visual_state state) 
 {   
-    if(state.act == ZMK_ACTIVITY_IDLE || state.act == ZMK_ACTIVITY_PAST_IDLE)
+    if(state.act == ZMK_ACTIVITY_IDLE)// || state.act == ZMK_ACTIVITY_PAST_IDLE)
     {
         LOG_INF("should be hidden");
         //lv_obj_fade_out(meter, 1000, 0);

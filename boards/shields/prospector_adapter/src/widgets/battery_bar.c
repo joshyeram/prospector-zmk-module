@@ -123,11 +123,11 @@ static void battery_toggle_sel(lv_obj_t *image, struct battery_visual_state stat
         LOG_INF("battery unhide idle/active" );
         lv_obj_clear_flag(image, LV_OBJ_FLAG_HIDDEN);
     }
-    else if (state.act == ZMK_ACTIVITY_PAST_IDLE)
-    {
-        LOG_INF("battery hide sleep");
-        lv_obj_add_flag(image, LV_OBJ_FLAG_HIDDEN);
-    }   
+    // else if (state.act == ZMK_ACTIVITY_PAST_IDLE)
+    // {
+    //     LOG_INF("battery hide sleep");
+    //     lv_obj_add_flag(image, LV_OBJ_FLAG_HIDDEN);
+    // }   
 }
 
 static void battery_vis_toggle_update_cb(struct battery_visual_state state) 

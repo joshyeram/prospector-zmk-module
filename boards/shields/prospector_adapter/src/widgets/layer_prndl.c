@@ -92,7 +92,7 @@ static struct layer_prndl_state layer_prndl_get_state(const zmk_event_t *eh) {
 
 static void layer_prndl_toggle_sel(lv_obj_t *meter, struct layer_prndl_visual_state state) 
 {   
-    if(state.act == ZMK_ACTIVITY_IDLE || state.act == ZMK_ACTIVITY_PAST_IDLE)
+    if(state.act == ZMK_ACTIVITY_IDLE)// || state.act == ZMK_ACTIVITY_PAST_IDLE)
     {
         lv_obj_add_flag(meter, LV_OBJ_FLAG_HIDDEN);
     }   
