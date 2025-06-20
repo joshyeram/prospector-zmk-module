@@ -64,7 +64,7 @@ static void caps_bar_toggle_sel(lv_obj_t *meter, struct caps_bar_visual_state st
     {
         lv_obj_add_flag(meter, LV_OBJ_FLAG_HIDDEN);
     }   
-    else if (state.act == ZMK_ACTIVITY_ACTIVE && lastActive)
+    else if (state.act == ZMK_ACTIVITY_ACTIVE)
     {
         lv_obj_clear_flag(meter, LV_OBJ_FLAG_HIDDEN);
     }
