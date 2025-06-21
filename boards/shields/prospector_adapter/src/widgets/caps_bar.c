@@ -16,7 +16,7 @@ static sys_slist_t widgets = SYS_SLIST_STATIC_INIT(&widgets);
 #define LED_NLCK 0x01
 #define LED_CLCK 0x02
 #define LED_SLCK 0x04
-
+bool isCLK = false;
 struct caps_bar_state 
 {    
     zmk_hid_indicators_t ind;
@@ -33,11 +33,13 @@ static void caps_bar_set(lv_obj_t *bar, struct caps_bar_state state)
     {
         LOG_INF("clck");
         lv_obj_clear_flag(bar, LV_OBJ_FLAG_HIDDEN);
+        isCLK = true;
     }
     else
     {
         LOG_INF("no clck");
         lv_obj_add_flag(bar, LV_OBJ_FLAG_HIDDEN);
+        isCLK = false;
     }
 }
 
@@ -64,7 +66,7 @@ static void caps_bar_toggle_sel(lv_obj_t *meter, struct caps_bar_visual_state st
     {
         lv_obj_add_flag(meter, LV_OBJ_FLAG_HIDDEN);
     }   
-    else if (state.act == ZMK_ACTIVITY_ACTIVE)
+    else if (state.act == ZMK_ACTIVITY_ACTIVE && isCLK)
     {
         lv_obj_clear_flag(meter, LV_OBJ_FLAG_HIDDEN);
     }
