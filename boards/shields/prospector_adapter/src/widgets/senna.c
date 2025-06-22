@@ -34,14 +34,14 @@ static void senna_toggle_sel(lv_obj_t *image, struct senna_visual_state state)
     }
     else if (state.act == ZMK_ACTIVITY_PAST_IDLE)
     {
-        led_set_brightness(pwm_leds_dev, DISP_BL, 10);
+        led_set_brightness(pwm_leds_dev, DISP_BL, 50);
         LOG_INF("senna hide sleep");
         lv_obj_add_flag(image, LV_OBJ_FLAG_HIDDEN);
         //lv_obj_clear_flag(image, LV_OBJ_FLAG_HIDDEN);
     }   
     else if (state.act == ZMK_ACTIVITY_ACTIVE)
     {
-        led_set_brightness(pwm_leds_dev, DISP_BL, 200);
+        led_set_brightness(pwm_leds_dev, DISP_BL, 225);
         LOG_INF("senna hide act");
         lv_obj_add_flag(image, LV_OBJ_FLAG_HIDDEN);
     }
