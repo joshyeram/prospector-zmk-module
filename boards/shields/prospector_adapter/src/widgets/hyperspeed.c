@@ -12,8 +12,6 @@ LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 
 static sys_slist_t widgets = SYS_SLIST_STATIC_INIT(&widgets);
 
-static lv_color_t cbuf[LV_CANVAS_BUF_SIZE_INDEXED_1BIT(240, 280)];
-
 struct hyperspeed_visual_state 
 {
     enum zmk_activity_state act;
@@ -59,6 +57,8 @@ ZMK_SUBSCRIPTION(widget_hyperspeed_vis_toggle, zmk_activity_state_changed);
 int zmk_widget_hyperspeed_init(struct zmk_widget_hyperspeed *widget, lv_obj_t *parent)
 {    
     widget->obj = lv_canvas_create(parent);
+    static lv_color_t cbuf[LV_CANVAS_BUF_SIZE_INDEXED_1BIT(240, 280)];
+
     lv_canvas_set_buffer(widget->obj, cbuf, 240, 280, LV_IMG_CF_INDEXED_1BIT);
     lv_canvas_set_palette(widget->obj, 0, LV_COLOR_CHROMA_KEY);
     lv_canvas_set_palette(widget->obj, 1, lv_palette_main(LV_PALETTE_RED));
