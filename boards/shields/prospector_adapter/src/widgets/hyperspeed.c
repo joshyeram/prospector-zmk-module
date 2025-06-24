@@ -94,8 +94,8 @@ int zmk_widget_hyperspeed_init(struct zmk_widget_hyperspeed *widget, lv_obj_t *p
     lv_anim_t a;
     lv_anim_init(&a);
     lv_anim_set_var(&a, widget->obj);
-    lv_anim_set_values(&a, 10, 1000);
-    lv_anim_set_time(&a, 1000);
+    lv_anim_set_values(&a, 10, 100);
+    lv_anim_set_time(&a, 10000);
     lv_anim_set_playback_delay(&a, 100);
     lv_anim_set_playback_time(&a, 300);
     lv_anim_set_repeat_delay(&a, 500);
