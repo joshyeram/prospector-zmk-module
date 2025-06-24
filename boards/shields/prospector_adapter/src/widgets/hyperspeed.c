@@ -60,8 +60,8 @@ int zmk_widget_hyperspeed_init(struct zmk_widget_hyperspeed *widget, lv_obj_t *p
     static lv_color_t cbuf[LV_CANVAS_BUF_SIZE_INDEXED_1BIT(240, 280)];
 
     lv_canvas_set_buffer(widget->obj, cbuf, 240, 280, LV_IMG_CF_INDEXED_1BIT);
-    lv_canvas_set_palette(widget->obj, 0, LV_COLOR_CHROMA_KEY);
-    lv_canvas_set_palette(widget->obj, 1, lv_palette_main(LV_PALETTE_RED));
+    lv_canvas_set_palette(widget->obj, 0, lv_color_white());
+    lv_canvas_set_palette(widget->obj, 1, lv_color_black());
     lv_obj_center(widget->obj);
 
     lv_color_t c0;
