@@ -64,14 +64,13 @@ int zmk_widget_hyperspeed_init(struct zmk_widget_hyperspeed *widget, lv_obj_t *p
     lv_canvas_set_palette(widget->obj, 1, lv_palette_main(LV_PALETTE_RED));
     lv_obj_center(widget->obj);
 
-    lv_canvas_fill_bg(widget->obj, c1, LV_OPA_COVER);
-
-
     lv_color_t c0;
     lv_color_t c1;
 
     c0.full = 0;
     c1.full = 1;
+
+    lv_canvas_fill_bg(widget->obj, c1, LV_OPA_COVER);
 
     uint32_t x;
     uint32_t y;
