@@ -40,7 +40,7 @@ lv_obj_t *zmk_display_status_screen()
 
     zmk_widget_senna_init(&senna_widget, screen);
 
-    zmk_widget_hyperspeed_init(&hyperspeed_widget, screen)
+    zmk_widget_hyperspeed_init(&hyperspeed_widget, screen);
 
     zmk_widget_battery_bar_init(&battery_bar_widget, screen);
     lv_obj_set_size(zmk_widget_battery_bar_obj(&battery_bar_widget), lv_pct(100), 48);
