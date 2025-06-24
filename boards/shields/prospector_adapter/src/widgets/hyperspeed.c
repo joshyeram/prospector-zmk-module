@@ -11,7 +11,9 @@
 LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 
 static sys_slist_t widgets = SYS_SLIST_STATIC_INIT(&widgets);
-
+static lv_color_t white;
+static lv_color_t black;
+static bool draw = false;
 struct hyperspeed_visual_state 
 {
     enum zmk_activity_state act;
@@ -19,6 +21,7 @@ struct hyperspeed_visual_state
 
 static void hyperspeed_toggle_sel(lv_obj_t *canvas, struct hyperspeed_visual_state state) 
 {   
+    draw = false;
     if(state.act == ZMK_ACTIVITY_IDLE)
     {
         LOG_INF("hyperspeed remain hide idle");
@@ -28,6 +31,7 @@ static void hyperspeed_toggle_sel(lv_obj_t *canvas, struct hyperspeed_visual_sta
     {
         LOG_INF("hyperspeed unhide sleep");
         lv_obj_clear_flag(canvas, LV_OBJ_FLAG_HIDDEN);
+        draw = true;
     }   
     else if (state.act == ZMK_ACTIVITY_ACTIVE)
     {
@@ -54,33 +58,51 @@ static struct hyperspeed_visual_state hyperspeed_vis_toggle_get_state(const zmk_
 ZMK_DISPLAY_WIDGET_LISTENER(widget_hyperspeed_vis_toggle, struct hyperspeed_visual_state, hyperspeed_vis_toggle_update_cb,    hyperspeed_vis_toggle_get_state)
 ZMK_SUBSCRIPTION(widget_hyperspeed_vis_toggle, zmk_activity_state_changed);
 
+static void anim_hyperspeed(lv_obj_t *canvas, uint32_t count)
+{
+    if(!draw)
+    {
+        return;
+    } 
+    lv_canvas_fill_bg(canvas, black, LV_OPA_COVER);
+    uint32_t x;
+    uint32_t y;
+    for( y = 10; y < count; y++) 
+    {
+        for( x = 5; x < count; x++) 
+        {
+            lv_canvas_set_px(canvas, x, y, white);
+        }
+    }
+}
+
 int zmk_widget_hyperspeed_init(struct zmk_widget_hyperspeed *widget, lv_obj_t *parent)
 {    
     widget->obj = lv_canvas_create(parent);
     static lv_color_t cbuf[LV_CANVAS_BUF_SIZE_INDEXED_1BIT(240, 280)];
-
     lv_canvas_set_buffer(widget->obj, cbuf, 240, 280, LV_IMG_CF_INDEXED_1BIT);
     lv_canvas_set_palette(widget->obj, 0, lv_color_white());
     lv_canvas_set_palette(widget->obj, 1, lv_color_black());
     lv_obj_center(widget->obj);
 
-    lv_color_t c0;
-    lv_color_t c1;
+    white.full = 0;
+    black.full = 1;
 
-    c0.full = 0;
-    c1.full = 1;
-
-    lv_canvas_fill_bg(widget->obj, c1, LV_OPA_COVER);
-
-    uint32_t x;
-    uint32_t y;
-    for( y = 10; y < 30; y++) {
-        for( x = 5; x < 20; x++) {
-            lv_canvas_set_px(widget->obj, x, y, c0);
-        }
-    }
-
+    lv_canvas_fill_bg(widget->obj, black, LV_OPA_COVER);
     lv_obj_add_flag(widget->obj, LV_OBJ_FLAG_HIDDEN);
+
+    lv_anim_t a;
+    lv_anim_init(&a);
+    lv_anim_set_var(&a, widget->obj);
+    lv_anim_set_values(&a, 10, 1000);
+    lv_anim_set_time(&a, 1000);
+    lv_anim_set_playback_delay(&a, 100);
+    lv_anim_set_playback_time(&a, 300);
+    lv_anim_set_repeat_delay(&a, 500);
+    lv_anim_set_repeat_count(&a, LV_ANIM_REPEAT_INFINITE);
+    lv_anim_set_exec_cb(&a, anim_hyperspeed);
+    lv_anim_start(&a);
+    
     sys_slist_append(&widgets, &widget->node);
     widget_hyperspeed_vis_toggle_init();
     return 0;
