@@ -59,7 +59,7 @@ static void wpm_ind_update_cb(struct wpm_ind_state state)
 static struct wpm_ind_state wpm_ind_get_state(const zmk_event_t *eh) 
 {
     struct zmk_wpm_state_changed *ev = as_zmk_wpm_state_changed(eh);
-    LOG_INF("wpm is  %d", ev->state);
+    //LOG_INF("wpm is  %d", ev->state);
     return (struct wpm_ind_state){.wpm = ev->state};
 }
 
@@ -67,13 +67,13 @@ static void wpm_ind_toggle_sel(lv_obj_t *meter, struct wpm_ind_visual_state stat
 {   
     if(state.act == ZMK_ACTIVITY_IDLE || state.act == ZMK_ACTIVITY_PAST_IDLE)
     {
-        LOG_INF("should be hidden");
+        //LOG_INF("should be hidden");
         //lv_obj_fade_out(meter, 1000, 0);
         lv_obj_add_flag(meter, LV_OBJ_FLAG_HIDDEN);
     }   
     else if (state.act == ZMK_ACTIVITY_ACTIVE)
     {
-        LOG_INF("should be un-hidden");
+        //LOG_INF("should be un-hidden");
         //lv_obj_fade_in(meter, 1000, 0);
         lv_obj_clear_flag(meter, LV_OBJ_FLAG_HIDDEN);
     }
@@ -85,7 +85,7 @@ static void wpm_ind_vis_toggle_update_cb(struct wpm_ind_visual_state state)
     SYS_SLIST_FOR_EACH_CONTAINER(&widgets, widget, node) 
     {
         wpm_ind_toggle_sel(widget->obj, state);
-        LOG_INF("ran toggle");
+        //("ran toggle");
     }
 }
 
@@ -94,15 +94,15 @@ static struct wpm_ind_visual_state wpm_ind_vis_toggle_get_state(const zmk_event_
     struct zmk_activity_state_changed *ev = as_zmk_activity_state_changed(eh);
     if(ev->state == ZMK_ACTIVITY_IDLE)
     {
-        LOG_INF("avtivity is idle");
+        //LOG_INF("avtivity is idle");
     }
     else if (ev->state == ZMK_ACTIVITY_SLEEP)
     {
-        LOG_INF("avtivity is sleep");
+        //LOG_INF("avtivity is sleep");
     }
     else if (ev->state == ZMK_ACTIVITY_ACTIVE)
     {
-        LOG_INF("avtivity is active");
+        //LOG_INF("avtivity is active");
     }
     return (struct wpm_ind_visual_state){.act = ev->state};
 }

@@ -25,18 +25,18 @@ static void hyperspeed_toggle_sel(lv_obj_t *canvas, struct hyperspeed_visual_sta
 {   
     if(state.act == ZMK_ACTIVITY_IDLE)
     {
-        LOG_INF("hyperspeed remain hide idle");
+        //LOG_INF("hyperspeed remain hide idle");
         lv_obj_add_flag(canvas, LV_OBJ_FLAG_HIDDEN);
     }
     else if (state.act == ZMK_ACTIVITY_PAST_IDLE)
     {
-        LOG_INF("hyperspeed unhide sleep");
+        //LOG_INF("hyperspeed unhide sleep");
         lv_obj_clear_flag(canvas, LV_OBJ_FLAG_HIDDEN);
         draw = true;
     }   
     else if (state.act == ZMK_ACTIVITY_ACTIVE)
     {
-        LOG_INF("hyperspeed hide active");
+        //LOG_INF("hyperspeed hide active");
         lv_obj_add_flag(canvas, LV_OBJ_FLAG_HIDDEN);
     }
 }
@@ -75,28 +75,35 @@ static void anim_hyperspeed(lv_obj_t *canvas, uint32_t count)
     uint32_t closeX = cos(degree[0] * (3.1415926/180.0)) * close;
     uint32_t closeY = sin(degree[0] * (3.1415926/180.0)) * close;
     
+    LOG_INF("far %f", far);
+    LOG_INF("farX %d", farX);
+    LOG_INF("farY %d", farY);
+    LOG_INF("close %f", close);
+    LOG_INF("closeX %d", closeX);
+    LOG_INF("closeY %d", closeY);
+
     if(farX == closeX && farY == closeY)
     {
         lv_canvas_set_px(canvas, farX, farY, white);
     }
     else
     {
-        uint32_t dx = farX - closeX;
-        uint32_t dy = farY - closeY;
+        // uint32_t dx = farX - closeX;
+        // uint32_t dy = farY - closeY;
 
-        uint32_t D = 2 * dy - dx;
-        uint32_t y = closeY;
+        // uint32_t D = 2 * dy - dx;
+        // uint32_t y = closeY;
 
-        for(uint32_t x = closeX; x <= farX; x++)
-        {
-            lv_canvas_set_px(canvas, x, y, white);
-            if(D > 0)
-            {
-                y++;
-                D -= 2 * dx;
-            }
-            D += 2 * dy;
-        }
+        // for(uint32_t x = closeX; x <= farX; x++)
+        // {
+        //     lv_canvas_set_px(canvas, x, y, white);
+        //     if(D > 0)
+        //     {
+        //         y++;
+        //         D -= 2 * dx;
+        //     }
+        //     D += 2 * dy;
+        // }
     }
 }
 

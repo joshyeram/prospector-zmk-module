@@ -81,7 +81,6 @@ static void layer_prndl_update_cb(struct layer_prndl_state state)
 
 static struct layer_prndl_state layer_prndl_get_state(const zmk_event_t *eh) {
     uint8_t index = zmk_keymap_highest_layer_active();
-    LOG_INF("prndl set to: %d", index);
     return (struct layer_prndl_state)
     {
         .index = index,
