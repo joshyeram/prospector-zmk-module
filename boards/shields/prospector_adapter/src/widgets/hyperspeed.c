@@ -77,9 +77,15 @@ static void anim_hyperspeed(lv_obj_t *canvas, uint32_t count)
     lv_point_t points[] = {{closeX, closeY}, {farX, farY}};
     lv_draw_line_dsc_t line_dsc;
     lv_draw_line_dsc_init(&line_dsc);
-    line_dsc.color = white; // Red color
-    line_dsc.width = 2; // 2 pixels wide
+    line_dsc.color = white;
+    line_dsc.width = 2;
     lv_canvas_draw_line(canvas, points, 2, &line_dsc);
+    LOG_INF("drawing: ");
+    LOG_INF("fx: " + farX);
+    LOG_INF("fy: " + farY);
+    LOG_INF("cx: " + closeX);
+    LOG_INF("cy: " + closeY);
+
 }
 
 int zmk_widget_hyperspeed_init(struct zmk_widget_hyperspeed *widget, lv_obj_t *parent)
