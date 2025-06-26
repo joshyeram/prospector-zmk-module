@@ -65,23 +65,39 @@ static void anim_hyperspeed(lv_obj_t *canvas, uint32_t count)
     {
         return;
     } 
-    lv_canvas_fill_bg(canvas, white, LV_OPA_COVER);
+    lv_canvas_fill_bg(canvas, black, LV_OPA_COVER);
     
-    uint32_t far   = exp(.007 * count) + 5;
-    uint32_t close = exp(.0052 * count) + 5;
+    float far   = exp(.007 * count) + 5;
+    float close = exp(.0052 * count) + 5;
+
     uint32_t farX =   cos(degree[0] * (3.1415926/180.0)) * far;
     uint32_t farY =   sin(degree[0] * (3.1415926/180.0)) * far;
     uint32_t closeX = cos(degree[0] * (3.1415926/180.0)) * close;
     uint32_t closeY = sin(degree[0] * (3.1415926/180.0)) * close;
-    lv_point_t points[] = {{closeX, closeY}, {farX, farY}};
-    lv_draw_line_dsc_t line_dsc;
-    lv_draw_line_dsc_init(&line_dsc);
-    line_dsc.color = black;
-    line_dsc.width = 2;
-    lv_canvas_draw_line(canvas, points, 2, &line_dsc);
-    LOG_INF("drawing: ");
-    LOG_INF("fx: %d", far);
-    LOG_INF("fy: %d", close);
+    
+    if(farX == closeX && farY == closeY)
+    {
+        lv_canvas_set_px(canvas, farX, farY, white);
+    }
+    else
+    {
+        uint32_t dx = farX - closeX;
+        uint32_t dy = farY - closeY;
+
+        uint32_t D = 2 * dy - dx;
+        uint32_t y = closeY;
+
+        for(uint32_t x = closeX; i <= farX; i++)
+        {
+            lv_canvas_set_px(canvas, x, y, white);
+            if(D > 0)
+            {
+                y++;
+                D -= 2 * dx;
+            }
+            D += 2 * dy
+        }
+    }
 }
 
 int zmk_widget_hyperspeed_init(struct zmk_widget_hyperspeed *widget, lv_obj_t *parent)
