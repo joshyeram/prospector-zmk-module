@@ -81,10 +81,10 @@ static void anim_hyperspeed(lv_obj_t *canvas, uint32_t count)
     line_dsc.width = 2;
     lv_canvas_draw_line(canvas, points, 2, &line_dsc);
     LOG_INF("drawing: ");
-    LOG_INF("fx: " + farX);
-    LOG_INF("fy: " + farY);
-    LOG_INF("cx: " + closeX);
-    LOG_INF("cy: " + closeY);
+    LOG_INF("fx: %d", farX);
+    LOG_INF("fy: %d", farY);
+    LOG_INF("cx: %d", closeX);
+    LOG_INF("cy: %d", closeY);
 
 }
 
