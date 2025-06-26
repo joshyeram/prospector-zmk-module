@@ -85,7 +85,7 @@ static void anim_hyperspeed(lv_obj_t *canvas, uint32_t count)
         line_dsc.color = lv_color_make(0xFF, 0xFF, 0xFF); // Red color
         line_dsc.width = 2; // 2 pixels wide
 
-        lv_canvas_draw_line(canvas, points, 2, &line_dsc)
+        lv_canvas_draw_line(canvas, points, 2, &line_dsc);
     }
 }
 
