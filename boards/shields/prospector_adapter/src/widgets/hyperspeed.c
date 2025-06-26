@@ -95,7 +95,7 @@ static void anim_hyperspeed(lv_obj_t *canvas, uint32_t count)
                 y++;
                 D -= 2 * dx;
             }
-            D += 2 * dy
+            D += 2 * dy;
         }
     }
 }
