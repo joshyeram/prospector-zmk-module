@@ -65,7 +65,7 @@ static void anim_hyperspeed(lv_obj_t *canvas, uint32_t count)
     {
         return;
     } 
-    lv_canvas_fill_bg(canvas, black, LV_OPA_COVER);
+    lv_canvas_fill_bg(canvas, white, LV_OPA_COVER);
     
     uint32_t far   = exp(.007 * count) + 5;
     uint32_t close = exp(.0052 * count) + 5;
@@ -76,7 +76,7 @@ static void anim_hyperspeed(lv_obj_t *canvas, uint32_t count)
     lv_point_t points[] = {{closeX, closeY}, {farX, farY}};
     lv_draw_line_dsc_t line_dsc;
     lv_draw_line_dsc_init(&line_dsc);
-    line_dsc.color = white;
+    line_dsc.color = black;
     line_dsc.width = 2;
     lv_canvas_draw_line(canvas, points, 2, &line_dsc);
     LOG_INF("drawing: ");
