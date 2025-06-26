@@ -68,25 +68,18 @@ static void anim_hyperspeed(lv_obj_t *canvas, uint32_t count)
     } 
     lv_canvas_fill_bg(canvas, black, LV_OPA_COVER);
     
-    for(uint8_t i = 0; i < 10; i++)
-    {
-        uint32_t far   = exp(.007 * count) + 5;
-        uint32_t close = exp(.052 * count) + 5;
-
-        uint32_t farX =   cos(degree[i] * (3.1415926/180.0)) * far;
-        uint32_t farY =   sin(degree[i] * (3.1415926/180.0)) * far;
-        uint32_t closeX = cos(degree[i] * (3.1415926/180.0)) * close;
-        uint32_t closeY = sin(degree[i] * (3.1415926/180.0)) * close;
-
-        lv_point_t points[] = {{closeX, closeY}, {farX, farY}};
-
-        lv_draw_line_dsc_t line_dsc;
-        lv_draw_line_dsc_init(&line_dsc);
-        line_dsc.color = white; // Red color
-        line_dsc.width = 2; // 2 pixels wide
-
-        lv_canvas_draw_line(canvas, points, 2, &line_dsc);
-    }
+    uint32_t far   = exp(.007 * count) + 5;
+    uint32_t close = exp(.052 * count) + 5;
+    uint32_t farX =   cos(degree[0] * (3.1415926/180.0)) * far;
+    uint32_t farY =   sin(degree[0] * (3.1415926/180.0)) * far;
+    uint32_t closeX = cos(degree[0] * (3.1415926/180.0)) * close;
+    uint32_t closeY = sin(degree[0] * (3.1415926/180.0)) * close;
+    lv_point_t points[] = {{closeX, closeY}, {farX, farY}};
+    lv_draw_line_dsc_t line_dsc;
+    lv_draw_line_dsc_init(&line_dsc);
+    line_dsc.color = white; // Red color
+    line_dsc.width = 2; // 2 pixels wide
+    lv_canvas_draw_line(canvas, points, 2, &line_dsc);
 }
 
 int zmk_widget_hyperspeed_init(struct zmk_widget_hyperspeed *widget, lv_obj_t *parent)
