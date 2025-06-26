@@ -23,7 +23,6 @@ struct hyperspeed_visual_state
 
 static void hyperspeed_toggle_sel(lv_obj_t *canvas, struct hyperspeed_visual_state state) 
 {   
-    draw = false;
     if(state.act == ZMK_ACTIVITY_IDLE)
     {
         LOG_INF("hyperspeed remain hide idle");
@@ -69,7 +68,7 @@ static void anim_hyperspeed(lv_obj_t *canvas, uint32_t count)
     lv_canvas_fill_bg(canvas, black, LV_OPA_COVER);
     
     uint32_t far   = exp(.007 * count) + 5;
-    uint32_t close = exp(.052 * count) + 5;
+    uint32_t close = exp(.0052 * count) + 5;
     uint32_t farX =   cos(degree[0] * (3.1415926/180.0)) * far;
     uint32_t farY =   sin(degree[0] * (3.1415926/180.0)) * far;
     uint32_t closeX = cos(degree[0] * (3.1415926/180.0)) * close;
@@ -81,11 +80,8 @@ static void anim_hyperspeed(lv_obj_t *canvas, uint32_t count)
     line_dsc.width = 2;
     lv_canvas_draw_line(canvas, points, 2, &line_dsc);
     LOG_INF("drawing: ");
-    LOG_INF("fx: %d", farX);
-    LOG_INF("fy: %d", farY);
-    LOG_INF("cx: %d", closeX);
-    LOG_INF("cy: %d", closeY);
-
+    LOG_INF("fx: %d", far);
+    LOG_INF("fy: %d", close);
 }
 
 int zmk_widget_hyperspeed_init(struct zmk_widget_hyperspeed *widget, lv_obj_t *parent)
