@@ -70,11 +70,22 @@ static void anim_hyperspeed(lv_obj_t *canvas, uint32_t count)
     float far   = exp(.007 * count) + 5;
     float close = exp(.0052 * count) + 5;
 
-    uint32_t farX =   cos(degree[0] * (3.1415926/180.0)) * far;
-    uint32_t farY =   sin(degree[0] * (3.1415926/180.0)) * far;
-    uint32_t closeX = cos(degree[0] * (3.1415926/180.0)) * close;
-    uint32_t closeY = sin(degree[0] * (3.1415926/180.0)) * close;
+    uint32_t farX =   cos(degree[0] * (3.1415926/180.0)) * far + 120;
+    uint32_t farY =   sin(degree[0] * (3.1415926/180.0)) * far + 140;
+    uint32_t closeX = cos(degree[0] * (3.1415926/180.0)) * close + 120;
+    uint32_t closeY = sin(degree[0] * (3.1415926/180.0)) * close + 140;
     
+    farX = (farX > 240) ? 240 : farX;
+    farY = (farY > 240) ? 240 : farY; 
+    closeX = (closeX > 280) ? 280 : closeX; 
+    closeY = (closeY > 280) ? 280 : closeY; 
+
+    farX = (farX < 0) ? 0 : farX;
+    farY = (farY < 0) ? 0 : farY; 
+    closeX = (closeX < 0) ? 0 : closeX; 
+    closeY = (closeY < 0) ? 0 : closeY; 
+     
+
     LOG_INF("far %f", far);
     LOG_INF("farX %d", farX);
     LOG_INF("farY %d", farY);
