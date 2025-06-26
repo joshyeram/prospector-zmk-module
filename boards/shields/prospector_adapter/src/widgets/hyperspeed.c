@@ -87,7 +87,7 @@ static void anim_hyperspeed(lv_obj_t *canvas, uint32_t count)
         uint32_t D = 2 * dy - dx;
         uint32_t y = closeY;
 
-        for(uint32_t x = closeX; i <= farX; i++)
+        for(uint32_t x = closeX; x <= farX; x++)
         {
             lv_canvas_set_px(canvas, x, y, white);
             if(D > 0)
