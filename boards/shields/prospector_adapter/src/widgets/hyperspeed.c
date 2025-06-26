@@ -1,5 +1,5 @@
 #include "hyperspeed.h"
-
+#include <math.h>
 #include <ctype.h>
 #include <zephyr/kernel.h>
 #include <zmk/display.h>
@@ -14,6 +14,8 @@ static sys_slist_t widgets = SYS_SLIST_STATIC_INIT(&widgets);
 static lv_color_t white;
 static lv_color_t black;
 static bool draw = false;
+
+static uint16_t degree[10] = {0, 36, 72, 108, 144, 180, 216, 252, 288, 324};
 struct hyperspeed_visual_state 
 {
     enum zmk_activity_state act;
@@ -65,14 +67,25 @@ static void anim_hyperspeed(lv_obj_t *canvas, uint32_t count)
         return;
     } 
     lv_canvas_fill_bg(canvas, black, LV_OPA_COVER);
-    uint32_t x;
-    uint32_t y;
-    for( y = 10; y < count; y++) 
+    
+    for(uint8_t i = 0; i < 10; i++)
     {
-        for( x = 5; x < count; x++) 
-        {
-            lv_canvas_set_px(canvas, x, y, white);
-        }
+        uint32_t far   = exp(.007 * count) + 5;
+        uint32_t close = exp(.052 * count) + 5;
+
+        uint32_t farX =   cos(degree[i] * (3.1415926/180.0)) * far;
+        uint32_t farY =   sin(degree[i] * (3.1415926/180.0)) * far;
+        uint32_t closeX = cos(degree[i] * (3.1415926/180.0)) * close;
+        uint32_t closeY = sin(degree[i] * (3.1415926/180.0)) * close;
+
+        lv_point_t points[] = {{closeX, closeY}, {farX, farY}};
+
+        lv_draw_line_dsc_t line_dsc;
+        lv_draw_line_dsc_init(&line_dsc);
+        line_dsc.color = lv_color_make(0xFF, 0xFF, 0xFF); // Red color
+        line_dsc.width = 2; // 2 pixels wide
+
+        lv_canvas_draw_line(canvas, points, 2, line_dsc)
     }
 }
 
@@ -94,10 +107,8 @@ int zmk_widget_hyperspeed_init(struct zmk_widget_hyperspeed *widget, lv_obj_t *p
     lv_anim_t a;
     lv_anim_init(&a);
     lv_anim_set_var(&a, widget->obj);
-    lv_anim_set_values(&a, 10, 100);
-    lv_anim_set_time(&a, 10000);
-    lv_anim_set_playback_delay(&a, 100);
-    lv_anim_set_playback_time(&a, 300);
+    lv_anim_set_values(&a, 0, 1000);
+    lv_anim_set_time(&a, 1000);
     lv_anim_set_repeat_delay(&a, 500);
     lv_anim_set_repeat_count(&a, LV_ANIM_REPEAT_INFINITE);
     lv_anim_set_exec_cb(&a, anim_hyperspeed);
