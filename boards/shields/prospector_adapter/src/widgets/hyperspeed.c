@@ -77,16 +77,7 @@ static void anim_hyperspeed(lv_obj_t *canvas, uint32_t count)
     int farY =   sin(degree[0] * (3.1415926/180.0)) * far + 140;
     int closeX = cos(degree[0] * (3.1415926/180.0)) * close + 120;
     int closeY = sin(degree[0] * (3.1415926/180.0)) * close + 140;
-    
-    farX = (farX <0) ? 0 : farX;
-    farY = (farY < 0) ? 0 : farY; 
-    closeX = (closeX < 0) ? 0 : closeX; 
-    closeY = (closeY < 0) ? 0 : closeY; 
 
-    farX = (farX > 240) ? 240 : farX;
-    farY = (farY > 280) ? 280 : farY; 
-    closeX = (closeX > 240) ? 240 : closeX; 
-    closeY = (closeY > 280) ? 280 : closeY; 
 
     LOG_INF("From %d, %d to %d,%d", closeX, closeY, farX, farY);
 
@@ -114,8 +105,15 @@ static void anim_hyperspeed(lv_obj_t *canvas, uint32_t count)
         int eps = (ady - adx) >> 1;
         for(int x = closeX, y = closeY; sx < 0 ? x >= farX: x <= farX; x += sx)
         {
-            LOG_INF("drawing1 at  %d, %d", x, y);
-            lv_canvas_set_px(canvas, x, y, white);
+            if (x < 0 ||  239 < x || y < 0 ||  279 < y)
+            {
+                
+            }
+            else
+            {
+                LOG_INF("drawing1 at  %d, %d", x, y);
+                lv_canvas_set_px(canvas, x, y, white);
+            }
             eps += ady;
             if (eps << 1 >= adx)
             {
@@ -129,8 +127,15 @@ static void anim_hyperspeed(lv_obj_t *canvas, uint32_t count)
         int eps = (adx - ady) >> 1;
         for(int x = closeX, y = closeY; sy < 0 ? y >= farY: y <= farY; y += sy)
         {
-            LOG_INF("drawing2 at  %d, %d", x, y);
-            lv_canvas_set_px(canvas, x, y, white);
+            if (x < 0 ||  239 < x || y < 0 ||  279 < y)
+            {
+                
+            }
+            else
+            {
+                LOG_INF("drawing2 at  %d, %d", x, y);
+                lv_canvas_set_px(canvas, x, y, white);
+            }
             eps += adx;
             if (eps << 1 >= ady)
             {
