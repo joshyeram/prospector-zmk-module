@@ -75,10 +75,7 @@ static void anim_hyperspeed(lv_obj_t *canvas, uint32_t count)
     uint32_t closeX = cos(degree[0] * (3.1415926/180.0)) * close + 120;
     uint32_t closeY = sin(degree[0] * (3.1415926/180.0)) * close + 140;
     
-    farX = (farX > 240) ? 240 : farX;
-    farY = (farY > 280) ? 280 : farY; 
-    closeX = (closeX > 240) ? 240 : closeX; 
-    closeY = (closeY > 280) ? 280 : closeY; 
+    LOG_INF("From %d, %d to %d,%d", closeX, closeY, farX, farY);
 
     farX = (farX < 0) ? 0 : farX;
     farY = (farY < 0) ? 0 : farY; 
@@ -99,7 +96,7 @@ static void anim_hyperspeed(lv_obj_t *canvas, uint32_t count)
         uint32_t eps = (ady - adx) >> 1;
         for(uint32_t x = closeX, y = closeY; sx < 0 ? x >= farX: x <= farX; x += sx)
         {
-            if (x > 240 || y > 280 || x < 0 || y < 0)
+            if (x >= 240 || y >= 280 || x =< 0 || y =< 0)
             {
 
             }
@@ -120,7 +117,7 @@ static void anim_hyperspeed(lv_obj_t *canvas, uint32_t count)
         uint32_t eps = (adx - ady) >> 1;
         for(uint32_t x = closeX, y = closeY; sy < 0 ? y >= farY: y <= farY; y += sy)
         {
-            if (x > 240 || y > 280 || x < 0 || y < 0)
+            if (x >= 240 || y >= 280 || x =< 0 || y =< 0)
             {
 
             }
