@@ -107,7 +107,6 @@ static void anim_hyperspeed(lv_obj_t *canvas, uint32_t count)
             {
                 lv_canvas_set_px(canvas, x, y, white);
             }
-            lv_canvas_set_px(canvas, x, y, white);
             eps += ady;
             if (eps << 1 >= adx)
             {
