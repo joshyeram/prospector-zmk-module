@@ -102,6 +102,7 @@ static void anim_hyperspeed(lv_obj_t *canvas, uint32_t count)
             }
             else
             {
+                LOG_INF("drawing at  %d, %d", x, y);
                 lv_canvas_set_px(canvas, x, y, white);
             }
             eps += ady;
@@ -123,6 +124,7 @@ static void anim_hyperspeed(lv_obj_t *canvas, uint32_t count)
             }
             else
             {
+                LOG_INF("drawing at  %d, %d", x, y);
                 lv_canvas_set_px(canvas, x, y, white);
             }
             eps += adx;
