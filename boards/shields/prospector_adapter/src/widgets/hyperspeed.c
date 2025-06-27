@@ -85,8 +85,8 @@ static void anim_hyperspeed(lv_obj_t *canvas, uint32_t time)
 
     lv_canvas_fill_bg(canvas, black, LV_OPA_COVER);
 
-    uint8_t* x; = monacoX;
-    uint16_t* y; = monacoY;
+    uint8_t* x;
+    uint16_t* y;
     uint16_t maxTrack = 0;
     
     if(track == 0)
