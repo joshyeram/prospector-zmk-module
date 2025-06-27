@@ -79,10 +79,13 @@ static void anim_hyperspeed(lv_obj_t *canvas, uint32_t count)
         lv_canvas_set_px(canvas, x[i], y[i], white);
     }
 
-    lv_draw_rect_dsc_t rect_dsc;
-    lv_draw_rect_dsc_init(&rect_dsc);
-    rect_dsc.border_color = red;
-    lv_canvas_draw_rect(canvas, x[count], y[count], 5, 5, &rect_dsc);
+    for (uint16_t tX = x[count] - 2 ; tX < x[count] + 2; tX++)
+    {
+        for (uint16_t tY = y[count] - 2 ; tY < y[count] + 2; tY++)
+        {
+            lv_canvas_set_px(canvas, tX, tY, red);
+        }   
+    }
 }
 
 int zmk_widget_hyperspeed_init(struct zmk_widget_hyperspeed *widget, lv_obj_t *parent)
