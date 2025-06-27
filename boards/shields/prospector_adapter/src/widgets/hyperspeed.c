@@ -67,7 +67,7 @@ static void anim_hyperspeed(lv_obj_t *canvas, uint32_t count)
     } 
     lv_canvas_fill_bg(canvas, black, LV_OPA_COVER);
     
-    float far   = exp(.007 * count) + 5;
+    float far   = exp(.01 * count) + 5;
     float close = exp(.0052 * count) + 5;
 
     uint32_t farX =   cos(degree[0] * (3.1415926/180.0)) * far + 120;
