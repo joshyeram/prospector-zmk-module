@@ -77,10 +77,15 @@ static void anim_hyperspeed(lv_obj_t *canvas, uint32_t count)
     
     LOG_INF("From %d, %d to %d,%d", closeX, closeY, farX, farY);
 
-    farX = (farX < 0) ? 0 : farX;
+    farX = (farX <0) ? 0 : farX;
     farY = (farY < 0) ? 0 : farY; 
     closeX = (closeX < 0) ? 0 : closeX; 
     closeY = (closeY < 0) ? 0 : closeY; 
+
+    farX = (farX > 240) ? 240 : farX;
+    farY = (farY > 280) ? 280 : farY; 
+    closeX = (closeX > 240) ? 240 : closeX; 
+    closeY = (closeY > 280) ? 280 : closeY; 
 
     uint32_t dx = farX - closeX;
     uint32_t dy = farY - closeY;
