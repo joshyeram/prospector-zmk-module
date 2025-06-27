@@ -25,6 +25,7 @@ static void hyperspeed_toggle_sel(lv_obj_t *canvas, struct hyperspeed_visual_sta
 {   
     if(state.act == ZMK_ACTIVITY_IDLE)
     {
+        draw = false;
         //LOG_INF("hyperspeed remain hide idle");
         lv_obj_add_flag(canvas, LV_OBJ_FLAG_HIDDEN);
     }
@@ -36,6 +37,7 @@ static void hyperspeed_toggle_sel(lv_obj_t *canvas, struct hyperspeed_visual_sta
     }   
     else if (state.act == ZMK_ACTIVITY_ACTIVE)
     {
+        draw = false;
         //LOG_INF("hyperspeed hide active");
         lv_obj_add_flag(canvas, LV_OBJ_FLAG_HIDDEN);
     }
