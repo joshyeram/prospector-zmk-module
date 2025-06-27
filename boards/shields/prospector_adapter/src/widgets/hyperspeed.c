@@ -79,9 +79,9 @@ static void anim_hyperspeed(lv_obj_t *canvas, uint32_t count)
         lv_canvas_set_px(canvas, x[i], y[i], white);
     }
 
-    for (uint16_t tX = x[count] - 2 ; tX < x[count] + 2; tX++)
+    for (uint16_t tX = x[count] - 5 ; tX < x[count] + 5; tX++)
     {
-        for (uint16_t tY = y[count] - 2 ; tY < y[count] + 2; tY++)
+        for (uint16_t tY = y[count] - 5 ; tY < y[count] + 5; tY++)
         {
             lv_canvas_set_px(canvas, tX, tY, red);
         }   
