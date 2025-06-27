@@ -85,11 +85,21 @@ static void anim_hyperspeed(lv_obj_t *canvas, uint32_t count)
     uint32_t dx = farX - closeX;
     uint32_t dy = farY - closeY;
 
-    uint32_t adx = (abs(dx) + 1) << 1;
-    uint32_t ady = (abs(dy) + 1) << 1;
+    float adx = (abs(dx) + 1) << 1;
+    float ady = (abs(dy) + 1) << 1;
 
     uint32_t sx = dx > 0 ? 1 : -1;
     uint32_t sy = dy > 0 ? 1 : -1;
+
+    if (dx == 0)
+    {
+        sx = 0;
+    }
+
+    if (dy == 0)
+    {
+        sy = 0;
+    }
 
     if(adx > ady)
     {
