@@ -109,7 +109,7 @@ static void anim_hyperspeed(lv_obj_t *canvas, uint32_t time)
             y = interlagosY;
             maxTrack = INTERLAGOS;
             break;
-        default;
+        default:
             x = monacoX;
             y = monacoY;
             maxTrack = MONACO;
