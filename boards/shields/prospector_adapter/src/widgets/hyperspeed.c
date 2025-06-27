@@ -75,8 +75,6 @@ static void anim_hyperspeed(lv_obj_t *canvas, uint32_t count)
     int closeX = cos(degree[0] * (3.1415926/180.0)) * close + 120;
     int closeY = sin(degree[0] * (3.1415926/180.0)) * close + 140;
     
-    LOG_INF("From %d, %d to %d,%d", closeX, closeY, farX, farY);
-
     farX = (farX <0) ? 0 : farX;
     farY = (farY < 0) ? 0 : farY; 
     closeX = (closeX < 0) ? 0 : closeX; 
@@ -86,6 +84,8 @@ static void anim_hyperspeed(lv_obj_t *canvas, uint32_t count)
     farY = (farY > 280) ? 280 : farY; 
     closeX = (closeX > 240) ? 240 : closeX; 
     closeY = (closeY > 280) ? 280 : closeY; 
+
+    LOG_INF("From %d, %d to %d,%d", closeX, closeY, farX, farY);
 
     int dx = farX - closeX;
     int dy = farY - closeY;
@@ -113,7 +113,8 @@ static void anim_hyperspeed(lv_obj_t *canvas, uint32_t count)
         {
             if (x >= 240 || y >= 280 || x <= 0 || y <= 0)
             {
-
+                LOG_INF("drawing1 break");
+                break;
             }
             else
             {
@@ -135,7 +136,8 @@ static void anim_hyperspeed(lv_obj_t *canvas, uint32_t count)
         {
             if (x >= 240 || y >= 280 || x <= 0 || y <= 0)
             {
-
+                LOG_INF("drawing2 break");
+                break;
             }
             else
             {
