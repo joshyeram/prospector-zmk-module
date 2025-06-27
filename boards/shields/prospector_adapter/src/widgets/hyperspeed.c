@@ -123,18 +123,20 @@ static void anim_hyperspeed(lv_obj_t *canvas, uint32_t time)
 
     uint16_t currentCount = maxTrack/1000.0 * time;
 
-    for (uint16_t tX = x[currentCount] - 5 ; tX < x[currentCount] + 5; tX++)
-    {
-        for (uint16_t tY = y[currentCount] - 5 ; tY < y[currentCount] + 5; tY++)
-        {
-            lv_canvas_set_px(canvas, tX, tY, red);
-        }   
-    }
-
     if(time == 1000)
     {
         track++;
         track %= NUMOFTRACK;
+    }
+    else
+    {
+        for (uint16_t tX = x[currentCount] - 5 ; tX < x[currentCount] + 5; tX++)
+        {
+            for (uint16_t tY = y[currentCount] - 5 ; tY < y[currentCount] + 5; tY++)
+            {
+                lv_canvas_set_px(canvas, tX, tY, red);
+            }   
+        }
     }
 }
 
