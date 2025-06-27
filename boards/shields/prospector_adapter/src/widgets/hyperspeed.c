@@ -161,11 +161,10 @@ int zmk_widget_hyperspeed_init(struct zmk_widget_hyperspeed *widget, lv_obj_t *p
     lv_anim_init(&a);
     lv_anim_set_var(&a, widget->obj);
     lv_anim_set_values(&a, 0, 1000);
-    lv_anim_set_time(&a, 15000);
+    lv_anim_set_time(&a, 60000);
     lv_anim_set_repeat_count(&a, LV_ANIM_REPEAT_INFINITE);
     lv_anim_set_exec_cb(&a, anim_hyperspeed);
     lv_anim_start(&a);
-    
     sys_slist_append(&widgets, &widget->node);
     widget_hyperspeed_vis_toggle_init();
     return 0;
