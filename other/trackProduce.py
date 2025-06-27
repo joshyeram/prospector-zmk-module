@@ -103,8 +103,8 @@ def checkList(lst):
     img = Image.fromarray(tempImage, mode='L')
     img.save("trackTempCheck.png")
     
-tempConversion("monacoTrack.jpg")
-l = producePixel("trackTemp.png", (24, 187), "u")
+tempConversion("austria.png")
+l = producePixel("trackTemp.png", (132, 223), "u")
 print(l)
 checkList(l)
 
