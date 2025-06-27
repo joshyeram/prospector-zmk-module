@@ -118,7 +118,14 @@ static void anim_hyperspeed(lv_obj_t *canvas, uint32_t count)
             else
             {
                 LOG_INF("drawing at  %d, %d", x, y);
-                lv_canvas_set_px(canvas, x, y, white);
+                try 
+                {
+                    lv_canvas_set_px(canvas, x, y, white);
+                }
+                catch(...)
+                {
+                    LOG_INF("drawing failed");
+                }
             }
             eps += ady;
             if (eps << 1 >= adx)
@@ -140,7 +147,14 @@ static void anim_hyperspeed(lv_obj_t *canvas, uint32_t count)
             else
             {
                 LOG_INF("drawing at  %d, %d", x, y);
-                lv_canvas_set_px(canvas, x, y, white);
+                try 
+                {
+                    lv_canvas_set_px(canvas, x, y, white);
+                }
+                catch(...)
+                {
+                    LOG_INF("drawing failed");
+                }
             }
             eps += adx;
             if (eps << 1 >= ady)
