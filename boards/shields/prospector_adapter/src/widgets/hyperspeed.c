@@ -92,7 +92,7 @@ static void anim_hyperspeed(lv_obj_t *canvas, uint32_t time)
     uint16_t* y;
     uint16_t maxTrack = 0;
     
-    swtich(track)
+    switch(track)
     {
         case 0:
             x = monacoX;
@@ -110,7 +110,10 @@ static void anim_hyperspeed(lv_obj_t *canvas, uint32_t time)
             maxTrack = INTERLAGOS;
             break;
         default;
-            return;
+            x = monacoX;
+            y = monacoY;
+            maxTrack = MONACO;
+            track = 0;
     }
 
     for(uint16_t i = 0; i < maxTrack ; i++)
