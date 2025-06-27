@@ -64,97 +64,98 @@ ZMK_SUBSCRIPTION(widget_hyperspeed_vis_toggle, zmk_activity_state_changed);
 static void anim_hyperspeed(lv_obj_t *canvas, uint32_t count)
 {
     LOG_INF("count is %d", count);
-    if(!draw)
-    {
-        return;
-    } 
-    lv_canvas_fill_bg(canvas, black, LV_OPA_COVER);
+    return;
+    // if(!draw)
+    // {
+    //     return;
+    // } 
+    // lv_canvas_fill_bg(canvas, black, LV_OPA_COVER);
     
-    float far   = exp(.01 * count) + 5;
-    float close = exp(.0052 * count) + 5;
+    // float far   = exp(.01 * count) + 5;
+    // float close = exp(.0052 * count) + 5;
 
-    int farX =   cos(degree[0] * (3.1415926/180.0)) * far + 120;
-    int farY =   sin(degree[0] * (3.1415926/180.0)) * far + 140;
-    int closeX = cos(degree[0] * (3.1415926/180.0)) * close + 120;
-    int closeY = sin(degree[0] * (3.1415926/180.0)) * close + 140;
+    // int farX =   cos(degree[0] * (3.1415926/180.0)) * far + 120;
+    // int farY =   sin(degree[0] * (3.1415926/180.0)) * far + 140;
+    // int closeX = cos(degree[0] * (3.1415926/180.0)) * close + 120;
+    // int closeY = sin(degree[0] * (3.1415926/180.0)) * close + 140;
     
-    farX = (farX <0) ? 0 : farX;
-    farY = (farY < 0) ? 0 : farY; 
-    closeX = (closeX < 0) ? 0 : closeX; 
-    closeY = (closeY < 0) ? 0 : closeY; 
+    // farX = (farX <0) ? 0 : farX;
+    // farY = (farY < 0) ? 0 : farY; 
+    // closeX = (closeX < 0) ? 0 : closeX; 
+    // closeY = (closeY < 0) ? 0 : closeY; 
 
-    farX = (farX > 240) ? 240 : farX;
-    farY = (farY > 280) ? 280 : farY; 
-    closeX = (closeX > 240) ? 240 : closeX; 
-    closeY = (closeY > 280) ? 280 : closeY; 
+    // farX = (farX > 240) ? 240 : farX;
+    // farY = (farY > 280) ? 280 : farY; 
+    // closeX = (closeX > 240) ? 240 : closeX; 
+    // closeY = (closeY > 280) ? 280 : closeY; 
 
-    LOG_INF("From %d, %d to %d,%d", closeX, closeY, farX, farY);
+    // LOG_INF("From %d, %d to %d,%d", closeX, closeY, farX, farY);
 
-    int dx = farX - closeX;
-    int dy = farY - closeY;
+    // int dx = farX - closeX;
+    // int dy = farY - closeY;
 
-    int adx = (abs(dx) + 1) << 1;
-    int ady = (abs(dy) + 1) << 1;
+    // int adx = (abs(dx) + 1) << 1;
+    // int ady = (abs(dy) + 1) << 1;
 
-    int sx = dx > 0 ? 1 : -1;
-    int sy = dy > 0 ? 1 : -1;
+    // int sx = dx > 0 ? 1 : -1;
+    // int sy = dy > 0 ? 1 : -1;
 
-    if (dx == 0)
-    {
-        sx = 0;
-    }
+    // if (dx == 0)
+    // {
+    //     sx = 0;
+    // }
 
-    if (dy == 0)
-    {
-        sy = 0;
-    }
+    // if (dy == 0)
+    // {
+    //     sy = 0;
+    // }
 
-    if(adx > ady)
-    {
-        int eps = (ady - adx) >> 1;
-        for(int x = closeX, y = closeY; sx < 0 ? x >= farX: x <= farX; x += sx)
-        {
-            if (x >= 240 || y >= 280 || x <= 0 || y <= 0)
-            {
-                LOG_INF("drawing1 break");
-                break;
-            }
-            else
-            {
-                LOG_INF("drawing1 at  %d, %d", x, y);
-                lv_canvas_set_px(canvas, x, y, white);
-            }
-            eps += ady;
-            if (eps << 1 >= adx)
-            {
-                y += sy;
-                eps -= adx;
-            }
-        }
-    }
-    else
-    {
-        int eps = (adx - ady) >> 1;
-        for(int x = closeX, y = closeY; sy < 0 ? y >= farY: y <= farY; y += sy)
-        {
-            if (x >= 240 || y >= 280 || x <= 0 || y <= 0)
-            {
-                LOG_INF("drawing2 break");
-                break;
-            }
-            else
-            {
-                LOG_INF("drawing2 at  %d, %d", x, y);
-                lv_canvas_set_px(canvas, x, y, white);
-            }
-            eps += adx;
-            if (eps << 1 >= ady)
-            {
-                x += sx;
-                eps -= ady;
-            }
-        }
-    }
+    // if(adx > ady)
+    // {
+    //     int eps = (ady - adx) >> 1;
+    //     for(int x = closeX, y = closeY; sx < 0 ? x >= farX: x <= farX; x += sx)
+    //     {
+    //         if (x >= 240 || y >= 280 || x <= 0 || y <= 0)
+    //         {
+    //             LOG_INF("drawing1 break");
+    //             break;
+    //         }
+    //         else
+    //         {
+    //             LOG_INF("drawing1 at  %d, %d", x, y);
+    //             lv_canvas_set_px(canvas, x, y, white);
+    //         }
+    //         eps += ady;
+    //         if (eps << 1 >= adx)
+    //         {
+    //             y += sy;
+    //             eps -= adx;
+    //         }
+    //     }
+    // }
+    // else
+    // {
+    //     int eps = (adx - ady) >> 1;
+    //     for(int x = closeX, y = closeY; sy < 0 ? y >= farY: y <= farY; y += sy)
+    //     {
+    //         if (x >= 240 || y >= 280 || x <= 0 || y <= 0)
+    //         {
+    //             LOG_INF("drawing2 break");
+    //             break;
+    //         }
+    //         else
+    //         {
+    //             LOG_INF("drawing2 at  %d, %d", x, y);
+    //             lv_canvas_set_px(canvas, x, y, white);
+    //         }
+    //         eps += adx;
+    //         if (eps << 1 >= ady)
+    //         {
+    //             x += sx;
+    //             eps -= ady;
+    //         }
+    //     }
+    // }
 }
 
 int zmk_widget_hyperspeed_init(struct zmk_widget_hyperspeed *widget, lv_obj_t *parent)
