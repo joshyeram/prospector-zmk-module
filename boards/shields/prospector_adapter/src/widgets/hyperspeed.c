@@ -76,45 +76,66 @@ static void anim_hyperspeed(lv_obj_t *canvas, uint32_t count)
     uint32_t closeY = sin(degree[0] * (3.1415926/180.0)) * close + 140;
     
     farX = (farX > 240) ? 240 : farX;
-    farY = (farY > 240) ? 240 : farY; 
-    closeX = (closeX > 280) ? 280 : closeX; 
+    farY = (farY > 280) ? 280 : farY; 
+    closeX = (closeX > 240) ? 240 : closeX; 
     closeY = (closeY > 280) ? 280 : closeY; 
 
     farX = (farX < 0) ? 0 : farX;
     farY = (farY < 0) ? 0 : farY; 
     closeX = (closeX < 0) ? 0 : closeX; 
     closeY = (closeY < 0) ? 0 : closeY; 
-     
 
-    LOG_INF("far %f", far);
-    LOG_INF("farX %d", farX);
-    LOG_INF("farY %d", farY);
-    LOG_INF("close %f", close);
-    LOG_INF("closeX %d", closeX);
-    LOG_INF("closeY %d", closeY);
+    uint32_t dx = farX - closeX;
+    uint32_t dy = farY - closeY;
 
-    if(farX == closeX && farY == closeY)
+    uint32_t adx = (abs(dx) + 1) << 1;
+    uint32_t ady = (abs(dy) + 1) << 1;
+
+    uint32_t sx = dx > 0 ? 1 : -1;
+    uint32_t sy = dy > 0 ? 1 : -1;
+
+    if(adx > ady)
     {
-        lv_canvas_set_px(canvas, farX, farY, white);
+        uint32_t eps = (ady - adx) >> 1;
+        for(uint32_t x = closeX, y = closeY; sx < 0 ? x >= farX: x <= farX; x += sx)
+        {
+            if (x > 240 || y > 280 || x < 0 || y < 0)
+            {
+
+            }
+            else
+            {
+                lv_canvas_set_px(canvas, x, y, white);
+            }
+            lv_canvas_set_px(canvas, x, y, white);
+            eps += ady;
+            if (eps << 1 >= adx)
+            {
+                y += sy;
+                eps -= adx;
+            }
+        }
     }
     else
     {
-        // uint32_t dx = farX - closeX;
-        // uint32_t dy = farY - closeY;
+        uint32_t eps = (adx - ady) >> 1;
+        for(uint32_t x = closeX, y = closeY; sy < 0 ? y >= farY: y <= farY; y += sy)
+        {
+            if (x > 240 || y > 280 || x < 0 || y < 0)
+            {
 
-        // uint32_t D = 2 * dy - dx;
-        // uint32_t y = closeY;
-
-        // for(uint32_t x = closeX; x <= farX; x++)
-        // {
-        //     lv_canvas_set_px(canvas, x, y, white);
-        //     if(D > 0)
-        //     {
-        //         y++;
-        //         D -= 2 * dx;
-        //     }
-        //     D += 2 * dy;
-        // }
+            }
+            else
+            {
+                lv_canvas_set_px(canvas, x, y, white);
+            }
+            eps += adx;
+            if (eps << 1 >= ady)
+            {
+                x += sx;
+                eps -= ady;
+            }
+        }
     }
 }
 
