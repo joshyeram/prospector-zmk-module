@@ -46,7 +46,7 @@ def producePixel(path, start, direction):
 
     coord = (startX, startY)
     while True:
-        s = scan(tempImage, coord, 'u')
+        s = scan(tempImage, coord, direction)
         if s == False:
             break
         tempImage[coord[1]][coord[0]] = 255
