@@ -70,10 +70,10 @@ static void anim_hyperspeed(lv_obj_t *canvas, uint32_t count)
     float far   = exp(.01 * count) + 5;
     float close = exp(.0052 * count) + 5;
 
-    uint32_t farX =   cos(degree[0] * (3.1415926/180.0)) * far + 120;
-    uint32_t farY =   sin(degree[0] * (3.1415926/180.0)) * far + 140;
-    uint32_t closeX = cos(degree[0] * (3.1415926/180.0)) * close + 120;
-    uint32_t closeY = sin(degree[0] * (3.1415926/180.0)) * close + 140;
+    int farX =   cos(degree[0] * (3.1415926/180.0)) * far + 120;
+    int farY =   sin(degree[0] * (3.1415926/180.0)) * far + 140;
+    int closeX = cos(degree[0] * (3.1415926/180.0)) * close + 120;
+    int closeY = sin(degree[0] * (3.1415926/180.0)) * close + 140;
     
     LOG_INF("From %d, %d to %d,%d", closeX, closeY, farX, farY);
 
@@ -87,14 +87,14 @@ static void anim_hyperspeed(lv_obj_t *canvas, uint32_t count)
     closeX = (closeX > 240) ? 240 : closeX; 
     closeY = (closeY > 280) ? 280 : closeY; 
 
-    uint32_t dx = farX - closeX;
-    uint32_t dy = farY - closeY;
+    int dx = farX - closeX;
+    int dy = farY - closeY;
 
-    uint32_t adx = (abs(dx) + 1) << 1;
-    uint32_t ady = (abs(dy) + 1) << 1;
+    int adx = (abs(dx) + 1) << 1;
+    int ady = (abs(dy) + 1) << 1;
 
-    uint32_t sx = dx > 0 ? 1 : -1;
-    uint32_t sy = dy > 0 ? 1 : -1;
+    int sx = dx > 0 ? 1 : -1;
+    int sy = dy > 0 ? 1 : -1;
 
     if (dx == 0)
     {
@@ -108,8 +108,8 @@ static void anim_hyperspeed(lv_obj_t *canvas, uint32_t count)
 
     if(adx > ady)
     {
-        uint32_t eps = (ady - adx) >> 1;
-        for(uint32_t x = closeX, y = closeY; sx < 0 ? x >= farX: x <= farX; x += sx)
+        int eps = (ady - adx) >> 1;
+        for(int x = closeX, y = closeY; sx < 0 ? x >= farX: x <= farX; x += sx)
         {
             if (x >= 240 || y >= 280 || x <= 0 || y <= 0)
             {
@@ -117,15 +117,8 @@ static void anim_hyperspeed(lv_obj_t *canvas, uint32_t count)
             }
             else
             {
-                LOG_INF("drawing at  %d, %d", x, y);
-                try 
-                {
-                    lv_canvas_set_px(canvas, x, y, white);
-                }
-                catch(...)
-                {
-                    LOG_INF("drawing failed");
-                }
+                LOG_INF("drawing1 at  %d, %d", x, y);
+                lv_canvas_set_px(canvas, x, y, white);
             }
             eps += ady;
             if (eps << 1 >= adx)
@@ -137,8 +130,8 @@ static void anim_hyperspeed(lv_obj_t *canvas, uint32_t count)
     }
     else
     {
-        uint32_t eps = (adx - ady) >> 1;
-        for(uint32_t x = closeX, y = closeY; sy < 0 ? y >= farY: y <= farY; y += sy)
+        int eps = (adx - ady) >> 1;
+        for(int x = closeX, y = closeY; sy < 0 ? y >= farY: y <= farY; y += sy)
         {
             if (x >= 240 || y >= 280 || x <= 0 || y <= 0)
             {
@@ -146,15 +139,8 @@ static void anim_hyperspeed(lv_obj_t *canvas, uint32_t count)
             }
             else
             {
-                LOG_INF("drawing at  %d, %d", x, y);
-                try 
-                {
-                    lv_canvas_set_px(canvas, x, y, white);
-                }
-                catch(...)
-                {
-                    LOG_INF("drawing failed");
-                }
+                LOG_INF("drawing2 at  %d, %d", x, y);
+                lv_canvas_set_px(canvas, x, y, white);
             }
             eps += adx;
             if (eps << 1 >= ady)
