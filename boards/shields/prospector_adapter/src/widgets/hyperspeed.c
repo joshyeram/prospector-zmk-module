@@ -81,19 +81,19 @@ static void anim_hyperspeed(lv_obj_t *canvas, uint32_t count)
     }
     lv_canvas_fill_bg(canvas, black, LV_OPA_COVER);
     
-    // uint8_t* x = monacoX;
-    // uint16_t* y = monacoY;
-    // for(uint16_t i = 0; i < MONACO ; i++)
-    // {
-    //     lv_canvas_set_px(canvas, x[i], y[i], white);
-    // }
-
-    uint8_t* x = austriaX;
-    uint16_t* y = austriaY;
-    for(uint16_t i = 0; i < AUSTRIA ; i++)
+    uint8_t* x = monacoX;
+    uint16_t* y = monacoY;
+    for(uint16_t i = 0; i < MONACO ; i++)
     {
         lv_canvas_set_px(canvas, x[i], y[i], white);
     }
+
+    // uint8_t* x = austriaX;
+    // uint16_t* y = austriaY;
+    // for(uint16_t i = 0; i < AUSTRIA ; i++)
+    // {
+    //     lv_canvas_set_px(canvas, x[i], y[i], white);
+    // }
 
     for (uint16_t tX = x[count] - 5 ; tX < x[count] + 5; tX++)
     {
