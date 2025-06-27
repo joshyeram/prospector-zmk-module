@@ -90,7 +90,7 @@ int zmk_widget_hyperspeed_init(struct zmk_widget_hyperspeed *widget, lv_obj_t *p
 {    
     widget->obj = lv_canvas_create(parent);
     static lv_color_t cbuf[LV_CANVAS_BUF_SIZE_INDEXED_2BIT(240, 280)];
-    lv_canvas_set_buffer(widget->obj, cbuf, 240, 280, LV_IMG_CF_INDEXED_1BIT);
+    lv_canvas_set_buffer(widget->obj, cbuf, 240, 280, LV_IMG_CF_INDEXED_2BIT);
     lv_canvas_set_palette(widget->obj, 0, lv_color_white());
     lv_canvas_set_palette(widget->obj, 1, lv_color_black());
     lv_canvas_set_palette(widget->obj, 2, lv_palette_main(LV_PALETTE_RED));
