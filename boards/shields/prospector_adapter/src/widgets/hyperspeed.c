@@ -96,7 +96,7 @@ static void anim_hyperspeed(lv_obj_t *canvas, uint32_t count)
         uint32_t eps = (ady - adx) >> 1;
         for(uint32_t x = closeX, y = closeY; sx < 0 ? x >= farX: x <= farX; x += sx)
         {
-            if (x >= 240 || y >= 280 || x =< 0 || y =< 0)
+            if (x >= 240 || y >= 280 || x <= 0 || y <= 0)
             {
 
             }
@@ -117,7 +117,7 @@ static void anim_hyperspeed(lv_obj_t *canvas, uint32_t count)
         uint32_t eps = (adx - ady) >> 1;
         for(uint32_t x = closeX, y = closeY; sy < 0 ? y >= farY: y <= farY; y += sy)
         {
-            if (x >= 240 || y >= 280 || x =< 0 || y =< 0)
+            if (x >= 240 || y >= 280 || x <= 0 || y <= 0)
             {
 
             }
