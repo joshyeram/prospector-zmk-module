@@ -64,7 +64,10 @@ ZMK_SUBSCRIPTION(widget_hyperspeed_vis_toggle, zmk_activity_state_changed);
 static void anim_hyperspeed(lv_obj_t *canvas, uint32_t count)
 {
     LOG_INF("count is %d", count);
-
+    if (!draw)
+    {
+        return;
+    }
     lv_canvas_fill_bg(canvas, black, LV_OPA_COVER);
     
     float far   = exp(.01 * count) + 5;
