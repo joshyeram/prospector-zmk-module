@@ -81,8 +81,7 @@ static void anim_hyperspeed(lv_obj_t *canvas, uint32_t count)
 
     lv_draw_rect_dsc_t rect_dsc;
     lv_draw_rect_dsc_init(&rect_dsc);
-    rect_dsc.bg_opa = LV_OPA_COVER;
-    rect_dsc.border_color = lv_palette_main(LV_PALETTE_RED);
+    rect_dsc.border_color = red;
     lv_canvas_draw_rect(canvas, x[count], y[count], 5, 5, &rect_dsc);
 }
 
